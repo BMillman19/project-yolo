@@ -12,8 +12,10 @@ project.xcworkspace
 xcuserdata
 profile
 *.moved-aside
-app/Pods
+ios/Pods
 
+# Brunch
+web/publish
 
 # Node
 node_modules
