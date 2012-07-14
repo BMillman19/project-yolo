@@ -12,5 +12,16 @@ project.xcworkspace
 xcuserdata
 profile
 *.moved-aside
-.DS_Store
 app/Pods
+
+
+# Node
+node_modules
+npm-debug.log
+
+# Sublime
+*.sublime*
+
+# Mac
+.DS_Store
+
