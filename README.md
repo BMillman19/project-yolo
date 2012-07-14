@@ -11,4 +11,5 @@ cd app
 pod install
 ```
 
-* make all changes, build, and run in Promptu.xcworkspace
+* Make all changes, build, and run in Promptu.xcworkspace, NOT Promptu.xcodeproj
+* Remember to re-install the pods every time latest changes are pulled

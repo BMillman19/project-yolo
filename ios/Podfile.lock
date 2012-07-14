@@ -1,5 +1,7 @@
 PODS:
   - AFNetworking (1.0RC1)
+  - Underscore.m (0.1.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - Underscore.m
