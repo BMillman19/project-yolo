@@ -15,7 +15,7 @@ profile
 ios/Pods
 
 # Brunch
-web/publish
+web/public/*
 
 # Node
 node_modules
