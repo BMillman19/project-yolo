@@ -20,6 +20,8 @@
 		E5358FB115B3372600FFAAF3 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358FAF15B3372600FFAAF3 /* FilterViewController.m */; };
 		E5358FB215B3372600FFAAF3 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5358FB015B3372600FFAAF3 /* FilterViewController.xib */; };
 		E5358FB515B3373900FFAAF3 /* RevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358FB415B3373900FFAAF3 /* RevealController.m */; };
+		E5358FB815B35BF800FFAAF3 /* ButtonMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358FB615B35BF800FFAAF3 /* ButtonMenu.png */; };
+		E5358FB915B35BF800FFAAF3 /* ButtonMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358FB715B35BF800FFAAF3 /* ButtonMenu@2x.png */; };
 		E5898BD115B1F97B005EBEE0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD015B1F97B005EBEE0 /* UIKit.framework */; };
 		E5898BD315B1F97B005EBEE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD215B1F97B005EBEE0 /* Foundation.framework */; };
 		E5898BD515B1F97B005EBEE0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD415B1F97B005EBEE0 /* CoreGraphics.framework */; };
@@ -62,6 +64,8 @@
 		E5358FB015B3372600FFAAF3 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		E5358FB315B3373900FFAAF3 /* RevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevealController.h; sourceTree = "<group>"; };
 		E5358FB415B3373900FFAAF3 /* RevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealController.m; sourceTree = "<group>"; };
+		E5358FB615B35BF800FFAAF3 /* ButtonMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMenu.png; sourceTree = "<group>"; };
+		E5358FB715B35BF800FFAAF3 /* ButtonMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMenu@2x.png"; sourceTree = "<group>"; };
 		E5898BCC15B1F97B005EBEE0 /* Promptu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Promptu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5898BD015B1F97B005EBEE0 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E5898BD215B1F97B005EBEE0 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,6 +119,8 @@
 		E5358F5A15B2A8BB00FFAAF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5358FB615B35BF800FFAAF3 /* ButtonMenu.png */,
+				E5358FB715B35BF800FFAAF3 /* ButtonMenu@2x.png */,
 				E5358F8E15B2CEAD00FFAAF3 /* arrow.png */,
 				E5358F7715B2B76E00FFAAF3 /* background.png */,
 				E5358F7815B2B76E00FFAAF3 /* background@2x.png */,
@@ -345,6 +351,8 @@
 				E5358F7A15B2B76E00FFAAF3 /* background@2x.png in Resources */,
 				E5358F8F15B2CEAD00FFAAF3 /* arrow.png in Resources */,
 				E5358FB215B3372600FFAAF3 /* FilterViewController.xib in Resources */,
+				E5358FB815B35BF800FFAAF3 /* ButtonMenu.png in Resources */,
+				E5358FB915B35BF800FFAAF3 /* ButtonMenu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

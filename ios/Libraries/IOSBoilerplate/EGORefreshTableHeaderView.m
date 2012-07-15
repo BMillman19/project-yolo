@@ -84,18 +84,18 @@
 		[[self layer] addSublayer:layer];
 		_arrowImage=layer;
 		
-//		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
-//		[self addSubview:view];
-//		_activityView = view;
-//		[view release];
+		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+		[self addSubview:view];
+		_activityView = view;
+		[view release];
         
         
-        DACircularProgressView *view = [[DACircularProgressView alloc] initWithFrame:CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f)];
-        [self addSubview:view];
-        _progressView = view;
-        _progressView.roundedCorners = NO;
-        [view release];
+//        DACircularProgressView *view = [[DACircularProgressView alloc] initWithFrame:CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f)];
+//        [self addSubview:view];
+//        _progressView = view;
+//        _progressView.roundedCorners = NO;
+//        [view release];
 		
 		
 		[self setState:EGOOPullRefreshNormal];
@@ -155,8 +155,8 @@
 			}
 			
 			_statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
-			//[_activityView stopAnimating];
-            [_progressView stopAnimating];
+			[_activityView stopAnimating];
+            //[_progressView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = NO;
@@ -169,8 +169,8 @@
 		case EGOOPullRefreshLoading:
 			
 			_statusLabel.text = NSLocalizedString(@"Loading...", @"Loading Status");
-			//[_activityView startAnimating];
-            [_progressView startAnimating];
+			[_activityView startAnimating];
+            //[_progressView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = YES;
@@ -257,8 +257,8 @@
 - (void)dealloc {
 	
 	_delegate=nil;
-	//_activityView = nil;
-    _progressView = nil;
+	_activityView = nil;
+    //_progressView = nil;
 	_statusLabel = nil;
 	_arrowImage = nil;
 	_lastUpdatedLabel = nil;

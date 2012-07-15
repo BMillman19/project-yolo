@@ -3,3 +3,4 @@ platform :ios
 pod 'AFNetworking'
 pod 'Underscore.m'
 pod 'PrettyKit'
+pod 'MGBox'
