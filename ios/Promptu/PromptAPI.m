@@ -7,24 +7,47 @@
 //
 
 #import "PromptAPI.h"
+#import "AFNetworking.h"
+
+#define kHost @"http://localhost:3000"
+#define kPath @"iReporter/"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation PromptAPI
 
+@synthesize sessionDelegate;
+
 -(PromptAPI*)init
 {
-    self = [super init];
+    self = [super initWithBaseURL:[NSURL URLWithString:kHost]];
     
     if (self != nil) {
-        //initialize the object
-        user = nil;
-        
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        
-        // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
         [self setDefaultHeader:@"Accept" value:@"application/json"];
     }
     
     return self;
 }
+
+//-(void)commandWithParams:(NSMutableDictionary*)params onCompletion:(JSONResponseBlock)completionBlock
+//{
+//    NSMutableURLRequest *apiRequest = 
+//    [self multipartFormRequestWithMethod:@"POST" 
+//                                    path:kAPIPath 
+//                              parameters:params 
+//               constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+//                   //TODO: attach file if needed
+//               }];
+//    
+//    AFJSONRequestOperation* operation = [[AFJSONRequestOperation alloc] initWithRequest: apiRequest];
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        completionBlock(responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        completionBlock([NSDictionary dictionaryWithObject:[error localizedDescription] forKey:@"error"]);
+//    }];
+//    
+//    [operation start];
+//}
 
 @end
