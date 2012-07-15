@@ -1,13 +1,9 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
-  , http = require('http');
+  , http = require('http')
+  , config = require('./config');
 
-var app = express();
+app = express();
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -21,7 +17,8 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
 });
 
-app.configure('development', function(){
+app.configure('development', function () {
+  app.set('scripts', config.development.scripts);
   app.use(express.errorHandler());
 });
 
