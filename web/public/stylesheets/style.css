@@ -17,12 +17,16 @@ a {
 }
 .notif-priority {
   width: 10px;
-  background-color: red;
   height: 101%;
   float: left;
   -webkit-box-shadow: inset -2px 0px 5px 0px #BBB;
   box-shadow: inset -2px 0px 5px 0px #BBB;
 }
+.priority-0 { background-color: #E34A33; }
+.priority-1 { background-color: #FDBB84; }
+.priority-2 { background-color: #91BFDB; }
+.priority-3 { background-color: #2C7BB6; }
+
 
 .notif-content {
 }
