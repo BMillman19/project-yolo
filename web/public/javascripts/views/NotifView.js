@@ -1,7 +1,7 @@
 (function (window, $, _, Backbone, PUApp) {
   var NotifView = Backbone.View.extend({
     tagName: 'div',
-    className: 'notif',
+    className: 'notif box_shadow',
     template: _.template($('#notif-template').html() || ''),
     initialize: function () {
       this.model = this.options.model;

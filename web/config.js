@@ -5,6 +5,19 @@ config.development = {
     libs: [
       'javascripts/vendor/underscore.js',
       'javascripts/vendor/backbone.js'
+    ],
+    models: [
+      'javascripts/models/Notif.js'
+    ],
+    views: [
+      'javascripts/views/NotifView.js',
+      'javascripts/views/NotifsView.js'
+    ],
+    collections: [
+      'javascripts/collections/Notifs.js'
+    ],
+    controllers: [
+      'javascripts/controllers/Router.js'
     ]
   }
 };
