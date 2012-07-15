@@ -1,7 +1,11 @@
 PODS:
   - AFNetworking (1.0RC1)
+  - MGBox (0.0.1)
+  - PrettyKit (0.1.0)
   - Underscore.m (0.1.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - MGBox
+  - PrettyKit
   - Underscore.m

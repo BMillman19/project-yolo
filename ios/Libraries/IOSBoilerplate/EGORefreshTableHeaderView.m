@@ -73,7 +73,7 @@
 		CALayer *layer = [CALayer layer];
 		layer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
 		layer.contentsGravity = kCAGravityResizeAspect;
-		layer.contents = (id)[UIImage imageNamed:@"blueArrow.png"].CGImage;
+		layer.contents = (id)[UIImage imageNamed:@"blackArrow.png"].CGImage;
 		
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -84,17 +84,18 @@
 		[[self layer] addSublayer:layer];
 		_arrowImage=layer;
 		
-//		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
-//		[self addSubview:view];
-//		_activityView = view;
-//		[view release];
+		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+		[self addSubview:view];
+		_activityView = view;
+		[view release];
         
         
-        DACircularProgressView *view = [[DACircularProgressView alloc] initWithFrame:CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f)];
-        [self addSubview:view];
-        _progressView = view;
-        [view release];
+//        DACircularProgressView *view = [[DACircularProgressView alloc] initWithFrame:CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f)];
+//        [self addSubview:view];
+//        _progressView = view;
+//        _progressView.roundedCorners = NO;
+//        [view release];
 		
 		
 		[self setState:EGOOPullRefreshNormal];
@@ -154,8 +155,8 @@
 			}
 			
 			_statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
-			//[_activityView stopAnimating];
-            [_progressView stopAnimating];
+			[_activityView stopAnimating];
+            //[_progressView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = NO;
@@ -168,8 +169,8 @@
 		case EGOOPullRefreshLoading:
 			
 			_statusLabel.text = NSLocalizedString(@"Loading...", @"Loading Status");
-			//[_activityView startAnimating];
-            [_progressView startAnimating];
+			[_activityView startAnimating];
+            //[_progressView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = YES;
@@ -213,7 +214,6 @@
 		}
 		
 	}
-	
 }
 
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView {
@@ -257,8 +257,8 @@
 - (void)dealloc {
 	
 	_delegate=nil;
-	//_activityView = nil;
-    _progressView = nil;
+	_activityView = nil;
+    //_progressView = nil;
 	_statusLabel = nil;
 	_arrowImage = nil;
 	_lastUpdatedLabel = nil;

@@ -28,11 +28,13 @@
 
 - (void)startAnimating
 {
+    self.hidden = NO;
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(progressChange) userInfo:nil repeats:YES];
 }
 
 - (void)stopAnimating
 {
+    self.hidden = YES;
     if (_timer) {
         [_timer invalidate];
         _timer = nil;
@@ -72,6 +74,7 @@
     {
         self.backgroundColor = [UIColor clearColor];
         _roundedCorners = DA_ROUNDED_CORNERS_DEFAULT;
+        self.hidden = YES;
     }
     return self;
 }
