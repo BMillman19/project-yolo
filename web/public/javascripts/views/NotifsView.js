@@ -15,27 +15,28 @@
     },
     clickHandler: function (e) {
       var tagName = $(e.target).html();
-      this.currentselection = this.model.filter(function (model) {
-        return _.include(model.get('tags'), tagName);
-      });
-      this.render();
+      this.model.each(_.bind(function (model) {
+        if (!_.include(model.get('tags'), tagName)) {
+          this.subviews[model.cid].$el.hide();
+        }
+      }, this));
     },
     resetSelection: function () {
-      this.currentselection = this.model.models;
-      this.render();
+      this.model.each(_.bind(function (model) {
+        this.subviews[model.cid].$el.show();
+      }, this));
     },
     addNotif: function (notifModel) {
-      this.subviews[notifModel.cid] = new NotifView({
+      var view = new NotifView({
           model: notifModel
       });
+      this.$el.append(view.render().$el);
+      this.subviews[notifModel.cid] = view;
     },
     render: function () {
-      var self = this;
-      self.$el.children().remove();
-      _.each(this.currentselection, function (userModel) {
-        self.$el.append(self.subviews[userModel.cid].render().$el);
-      });
-      return self;
+      _.each(this.model.models, _.bind(function (userModel) {
+        this.subviews[userModel.cid].render();
+      }, this));
     }
   });
 
