@@ -5,6 +5,7 @@ body {
 }
 
 a {
+  cursor: pointer;
   color: #00B7FF;
 }
 
@@ -78,6 +79,9 @@ a {
   color: white;
   border-radius: 5px;
   line-height: 20px;
+}
+.notif-tag:hover {
+  background-color: #8cb4e5;
 }
 .box_round {
   -webkit-border-radius: 5px; /* Saf3-4, iOS 1-3.2, Android ≤1.6 */

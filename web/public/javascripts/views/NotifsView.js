@@ -8,12 +8,21 @@
       this.model
         .on('add', _.bind(this.addNotif, this));
       this.subviews = {};
+      this.resetSelection();
     },
     events: {
-      'click': 'clickHandler'
+      'click .notif-tag': 'clickHandler'
     },
     clickHandler: function (e) {
-
+      var tagName = $(e.target).html();
+      this.currentselection = this.model.filter(function (model) {
+        return _.include(model.get('tags'), tagName);
+      });
+      this.render();
+    },
+    resetSelection: function () {
+      this.currentselection = this.model.models;
+      this.render();
     },
     addNotif: function (notifModel) {
       this.subviews[notifModel.cid] = new NotifView({
@@ -23,7 +32,7 @@
     render: function () {
       var self = this;
       self.$el.children().remove();
-      _.each(self.model.models, function (userModel) {
+      _.each(this.currentselection, function (userModel) {
         self.$el.append(self.subviews[userModel.cid].render().$el);
       });
       return self;

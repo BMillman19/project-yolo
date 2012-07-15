@@ -9,28 +9,28 @@
       '*other': 'redirect'
     },
     init: function () {
-      var notifs = new Notifs();
-      var notifsview = new NotifsView({
-        model: notifs
+      this.notifs = new Notifs();
+      this.notifsview = new NotifsView({
+        model: this.notifs
       });
-      $('#notifs').append(notifsview.$el);
+      $('#notifs').append(this.notifsview.$el);
 
-      notifs.add([
-        { header: 'test', body: 'yolo', tags: ['aaa', 'bbb', 'ccc'] },
-        { header: 'test2', body: 'yolo', tags: [] },
+      this.notifs.add([
+        { header: 'test', body: 'yolo', tags: ['aaa'] },
+        { header: 'test2', body: 'yolo', tags: ['bbb'] },
+        { header: 'test3', body: 'yolo', tags: ['aaa'] },
+        { header: 'test', body: 'yolo', tags: [] },
+        { header: 'test2', body: 'yolo', tags: ['aaa'] },
         { header: 'test3', body: 'yolo', tags: [] },
         { header: 'test', body: 'yolo', tags: [] },
+        { header: 'test2', body: 'yolo', tags: ['aaa'] },
+        { header: 'test3', body: 'yolo', tags: [] },
+        { header: 'test', body: 'yolo', tags: ['bbb'] },
         { header: 'test2', body: 'yolo', tags: [] },
         { header: 'test3', body: 'yolo', tags: [] },
-        { header: 'test', body: 'yolo', tags: [] },
+        { header: 'test', body: 'yolo', tags: ['bbb'] },
         { header: 'test2', body: 'yolo', tags: [] },
-        { header: 'test3', body: 'yolo', tags: [] },
-        { header: 'test', body: 'yolo', tags: [] },
-        { header: 'test2', body: 'yolo', tags: [] },
-        { header: 'test3', body: 'yolo', tags: [] },
-        { header: 'test', body: 'yolo', tags: [] },
-        { header: 'test2', body: 'yolo', tags: [] },
-        { header: 'test3', body: 'yolo', tags: [] },
+        { header: 'test3', body: 'yolo', tags: ['bbb'] },
         { header: 'test', body: 'yolo', tags: [] },
         { header: 'test2', body: 'yolo', tags: [] },
         { header: 'test3', body: 'yolo', tags: [] },
@@ -40,10 +40,13 @@
         { header: 'test4', body: 'yolo', tags: [] }
       ]);
 
-      notifsview.render();
+      this.notifsview.render();
     },
     redirect: function () {
 
+    },
+    resetSelection: function () {
+      this.notifsview.resetSelection();
     }
   });
 
