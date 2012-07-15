@@ -1,7 +1,9 @@
 PODS:
   - AFNetworking (1.0RC1)
+  - PrettyKit (0.1.0)
   - Underscore.m (0.1.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - PrettyKit
   - Underscore.m

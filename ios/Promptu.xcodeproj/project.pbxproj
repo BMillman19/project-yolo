@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		E5358F5C15B2A8BB00FFAAF3 /* gplaypattern.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F5B15B2A8BB00FFAAF3 /* gplaypattern.png */; };
+		E5358F6515B2B0B900FFAAF3 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F6115B2B0B900FFAAF3 /* blackArrow.png */; };
+		E5358F6615B2B0B900FFAAF3 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F6215B2B0B900FFAAF3 /* blackArrow@2x.png */; };
+		E5358F6715B2B0B900FFAAF3 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F6315B2B0B900FFAAF3 /* blueArrow.png */; };
+		E5358F6815B2B0B900FFAAF3 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F6415B2B0B900FFAAF3 /* blueArrow@2x.png */; };
+		E5358F7915B2B76E00FFAAF3 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F7715B2B76E00FFAAF3 /* background.png */; };
+		E5358F7A15B2B76E00FFAAF3 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F7815B2B76E00FFAAF3 /* background@2x.png */; };
+		E5358F8F15B2CEAD00FFAAF3 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E5358F8E15B2CEAD00FFAAF3 /* arrow.png */; };
+		E5358F9315B2CECA00FFAAF3 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358F9215B2CECA00FFAAF3 /* PullRefreshTableViewController.m */; };
+		E5358FAA15B3367700FFAAF3 /* ZUUIRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358FA915B3367700FFAAF3 /* ZUUIRevealController.m */; };
+		E5358FB115B3372600FFAAF3 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358FAF15B3372600FFAAF3 /* FilterViewController.m */; };
+		E5358FB215B3372600FFAAF3 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5358FB015B3372600FFAAF3 /* FilterViewController.xib */; };
+		E5358FB515B3373900FFAAF3 /* RevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5358FB415B3373900FFAAF3 /* RevealController.m */; };
 		E5898BD115B1F97B005EBEE0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD015B1F97B005EBEE0 /* UIKit.framework */; };
 		E5898BD315B1F97B005EBEE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD215B1F97B005EBEE0 /* Foundation.framework */; };
 		E5898BD515B1F97B005EBEE0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5898BD415B1F97B005EBEE0 /* CoreGraphics.framework */; };
@@ -34,6 +46,22 @@
 		33ED468521CB4778A782B352 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E5358F5615B2A48F00FFAAF3 /* PUConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUConstants.h; sourceTree = "<group>"; };
 		E5358F5B15B2A8BB00FFAAF3 /* gplaypattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gplaypattern.png; sourceTree = "<group>"; };
+		E5358F6115B2B0B900FFAAF3 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		E5358F6215B2B0B900FFAAF3 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		E5358F6315B2B0B900FFAAF3 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		E5358F6415B2B0B900FFAAF3 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		E5358F7715B2B76E00FFAAF3 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		E5358F7815B2B76E00FFAAF3 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		E5358F8E15B2CEAD00FFAAF3 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		E5358F9115B2CECA00FFAAF3 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullRefreshTableViewController.h; path = ../Pods/PullToRefresh/Classes/PullRefreshTableViewController.h; sourceTree = "<group>"; };
+		E5358F9215B2CECA00FFAAF3 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullRefreshTableViewController.m; path = ../Pods/PullToRefresh/Classes/PullRefreshTableViewController.m; sourceTree = "<group>"; };
+		E5358FA815B3367700FFAAF3 /* ZUUIRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUUIRevealController.h; path = ../Pods/ZUUIRevealController/ZUUIRevealController/ZUUIRevealController.h; sourceTree = "<group>"; };
+		E5358FA915B3367700FFAAF3 /* ZUUIRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUUIRevealController.m; path = ../Pods/ZUUIRevealController/ZUUIRevealController/ZUUIRevealController.m; sourceTree = "<group>"; };
+		E5358FAE15B3372600FFAAF3 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		E5358FAF15B3372600FFAAF3 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		E5358FB015B3372600FFAAF3 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		E5358FB315B3373900FFAAF3 /* RevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevealController.h; sourceTree = "<group>"; };
+		E5358FB415B3373900FFAAF3 /* RevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealController.m; sourceTree = "<group>"; };
 		E5898BCC15B1F97B005EBEE0 /* Promptu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Promptu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5898BD015B1F97B005EBEE0 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E5898BD215B1F97B005EBEE0 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,9 +115,34 @@
 		E5358F5A15B2A8BB00FFAAF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5358F8E15B2CEAD00FFAAF3 /* arrow.png */,
+				E5358F7715B2B76E00FFAAF3 /* background.png */,
+				E5358F7815B2B76E00FFAAF3 /* background@2x.png */,
+				E5358F6115B2B0B900FFAAF3 /* blackArrow.png */,
+				E5358F6215B2B0B900FFAAF3 /* blackArrow@2x.png */,
+				E5358F6315B2B0B900FFAAF3 /* blueArrow.png */,
+				E5358F6415B2B0B900FFAAF3 /* blueArrow@2x.png */,
 				E5358F5B15B2A8BB00FFAAF3 /* gplaypattern.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E5358F9715B2CF0C00FFAAF3 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				E5358F9115B2CECA00FFAAF3 /* PullRefreshTableViewController.h */,
+				E5358F9215B2CECA00FFAAF3 /* PullRefreshTableViewController.m */,
+			);
+			name = PullToRefresh;
+			sourceTree = "<group>";
+		};
+		E5358FA715B3366E00FFAAF3 /* ZUUIRevealController */ = {
+			isa = PBXGroup;
+			children = (
+				E5358FA815B3367700FFAAF3 /* ZUUIRevealController.h */,
+				E5358FA915B3367700FFAAF3 /* ZUUIRevealController.m */,
+			);
+			name = ZUUIRevealController;
 			sourceTree = "<group>";
 		};
 		E5898BC115B1F97A005EBEE0 = {
@@ -178,6 +231,11 @@
 				E5898BE215B1F97B005EBEE0 /* PromptViewController.h */,
 				E5898BE315B1F97B005EBEE0 /* PromptViewController.m */,
 				E5898BE515B1F97B005EBEE0 /* PromptViewController.xib */,
+				E5358FAE15B3372600FFAAF3 /* FilterViewController.h */,
+				E5358FAF15B3372600FFAAF3 /* FilterViewController.m */,
+				E5358FB015B3372600FFAAF3 /* FilterViewController.xib */,
+				E5358FB315B3373900FFAAF3 /* RevealController.h */,
+				E5358FB415B3373900FFAAF3 /* RevealController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -196,6 +254,8 @@
 		E598126B15B2931B00D2EC95 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E5358FA715B3366E00FFAAF3 /* ZUUIRevealController */,
+				E5358F9715B2CF0C00FFAAF3 /* PullToRefresh */,
 				E598127315B294B600D2EC95 /* DACircularProgress */,
 				E598126C15B2931B00D2EC95 /* IOSBoilerplate */,
 			);
@@ -277,6 +337,14 @@
 				E5898BDB15B1F97B005EBEE0 /* InfoPlist.strings in Resources */,
 				E5898BE715B1F97B005EBEE0 /* PromptViewController.xib in Resources */,
 				E5358F5C15B2A8BB00FFAAF3 /* gplaypattern.png in Resources */,
+				E5358F6515B2B0B900FFAAF3 /* blackArrow.png in Resources */,
+				E5358F6615B2B0B900FFAAF3 /* blackArrow@2x.png in Resources */,
+				E5358F6715B2B0B900FFAAF3 /* blueArrow.png in Resources */,
+				E5358F6815B2B0B900FFAAF3 /* blueArrow@2x.png in Resources */,
+				E5358F7915B2B76E00FFAAF3 /* background.png in Resources */,
+				E5358F7A15B2B76E00FFAAF3 /* background@2x.png in Resources */,
+				E5358F8F15B2CEAD00FFAAF3 /* arrow.png in Resources */,
+				E5358FB215B3372600FFAAF3 /* FilterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +384,10 @@
 				E598126F15B2931B00D2EC95 /* ListViewController.m in Sources */,
 				E598127215B2937C00D2EC95 /* EGORefreshTableHeaderView.m in Sources */,
 				E598127615B294B600D2EC95 /* DACircularProgressView.m in Sources */,
+				E5358F9315B2CECA00FFAAF3 /* PullRefreshTableViewController.m in Sources */,
+				E5358FAA15B3367700FFAAF3 /* ZUUIRevealController.m in Sources */,
+				E5358FB115B3372600FFAAF3 /* FilterViewController.m in Sources */,
+				E5358FB515B3373900FFAAF3 /* RevealController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

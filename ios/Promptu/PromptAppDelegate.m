@@ -9,6 +9,8 @@
 #import "PromptAppDelegate.h"
 
 #import "PromptViewController.h"
+#import "FilterViewController.h"
+#import "RevealController.h"
 
 @implementation PromptAppDelegate
 
@@ -24,12 +26,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    self.viewController = [[[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil] autorelease];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    return YES;
+
+    
+    
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window = window;
+	
+    
+    PromptViewController* frontViewController = [[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil];	
+    FilterViewController *rearViewController = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];	
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
+	RevealController *revealController = [[RevealController alloc] initWithFrontViewController:navigationController rearViewController:rearViewController];
+	self.viewController = revealController;
+	
+	self.window.rootViewController = self.viewController;
+	[self.window makeKeyAndVisible];
+	return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

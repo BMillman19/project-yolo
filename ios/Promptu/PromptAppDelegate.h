@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class PromptViewController;
+@class RevealController;
 
 @interface PromptAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) PromptViewController *viewController;
+@property (strong, nonatomic) RevealController *viewController;
 
 @end
