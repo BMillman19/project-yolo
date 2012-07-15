@@ -20,6 +20,11 @@ html(class='no-js', lang='en')
     link(rel='stylesheet', href='stylesheets/style.css')
     script(src='javascripts/vendor/modernizr-2.5.3.min.js')
 
+    each val, key in templates
+      script(id=key+'-template', type='text/template')
+        != val
+
+
   body
     block content
 
@@ -37,7 +42,7 @@ html(class='no-js', lang='en')
     script(src='javascripts/plugins.js')
     script(src='javascripts/script.js')
 
-    each val, key in scripts
+    each val in scripts
       each s in val
         script(src=s)
 

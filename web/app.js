@@ -20,7 +20,7 @@ app.configure(function () {
 });
 
 _.each(['models', 'views', 'collections', 'controllers'], function (dir) {
-  var path = __dirname + '/public/javascripts/' + dir;
+  var path = 'public/javascripts/' + dir;
   config.development.scripts[dir] = _.chain(fs.readdirSync(path))
     .filter(function (file) {
       return (/^[a-zA-Z0-9-_\.]+\.js/).test(file);
@@ -30,6 +30,20 @@ _.each(['models', 'views', 'collections', 'controllers'], function (dir) {
     })
     .value();
 });
+
+config.templates = {};
+
+_.chain(fs.readdirSync('templates'))
+    .filter(function (file) {
+      return (/^[a-zA-Z0-9-_\.]+\.html/).test(file);
+    })
+    .each(function (file) {
+      config.templates[file.slice(0, -5)] = fs.readFileSync('templates/' + file).toString();
+    });
+
+console.log(config.templates);
+
+app.set('templates', config.templates);
 
 app.configure('development', function () {
   app.set('scripts', config.development.scripts);
