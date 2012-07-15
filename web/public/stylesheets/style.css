@@ -12,17 +12,62 @@ a {
   border: 1px solid #DDD;
   background-color: #F0F0F0;
   margin: 20px 0;
+  height: 115px;
+}
+.notif-priority {
+  width: 10px;
+  background-color: red;
+  height: 101%;
+  float: left;
+  -webkit-box-shadow: inset -2px 0px 5px 0px #BBB;
+  box-shadow: inset -2px 0px 5px 0px #BBB;
+}
+
+.notif-content {
+}
+.pushpin {
+  float: right;
+  position: relative;
+  top: -7px;
+}
+.pushpin-img {
+  width: 35px;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.pushpin-img:hover, .pushpin-active {
+  -moz-transform: rotate(0);
+  -webkit-transform: rotate(0);
+  -o-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.pushpin-active {
+  color: red;
 }
 
 .notif-header {
-  padding: 20px 20px;
+  padding: 20px 30px;
   margin: 0;
   border-bottom: 1px solid #DDD;
   background-color: #F8F8F8;
 }
+.notif-header-text {
+  display: inline-block;
+}
 
 .notif-body {
-  padding: 15px 20px;
+  padding: 15px 30px;
   margin: 0;
   border-top: 1px solid white;
 }
