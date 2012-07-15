@@ -24,7 +24,6 @@ html(class='no-js', lang='en')
       script(id=key+'-template', type='text/template')
         != val
 
-
   body
     block content
 
@@ -45,7 +44,6 @@ html(class='no-js', lang='en')
     each val in scripts
       each s in val
         script(src=s)
-
 
     script
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

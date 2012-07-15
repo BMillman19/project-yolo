@@ -1,11 +1,21 @@
-<h1 class="notif-header">
-  <%= header %>
-</h1>
-<p class="notif-body">
-  <%= body %>
-  <span class="notif-tags">
-    <% for (var i = 0, l = tags.length; i < l; i += 1) { %>
-      <span class="notif-tag"><%= tags[i] %></span>
-    <% } %>
-  </span>
-</p>
+<div class="notif-priority priority-<%= priority %>"></div>
+<div class="notif-content">
+  <h1 class="notif-header">
+    <div class="notif-header-text">
+      <%= header %>
+    </div>
+    <a class="pushpin">
+      <img class="pushpin-img" src="images/pushpin.png" alt="pin">
+    </a>
+  </h1>
+  <div class="notif-body">
+    <span class="notif-body-text">
+      <%= body %>
+    </span>
+    <span class="notif-tags">
+      <% for (var i = 0, l = tags.length; i < l; i += 1) { %>
+        <a class="notif-tag"><%= tags[i] %></a>
+      <% } %>
+    </span>
+  </div>
+</div>

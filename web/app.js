@@ -19,29 +19,15 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
 });
 
-_.each(['models', 'views', 'collections', 'controllers'], function (dir) {
-  var path = 'public/javascripts/' + dir;
-  config.development.scripts[dir] = _.chain(fs.readdirSync(path))
-    .filter(function (file) {
-      return (/^[a-zA-Z0-9-_\.]+\.js/).test(file);
-    })
-    .map(function (file) {
-      return '/javascripts/' + dir + '/' + file;
-    })
-    .value();
-});
-
-config.templates = {};
-
-_.chain(fs.readdirSync('templates'))
-    .filter(function (file) {
-      return (/^[a-zA-Z0-9-_\.]+\.html/).test(file);
-    })
-    .each(function (file) {
-      config.templates[file.slice(0, -5)] = fs.readFileSync('templates/' + file).toString();
-    });
-
-console.log(config.templates);
+config.templates = _.chain(fs.readdirSync('templates'))
+  .filter(function (file) {
+    return (/^[a-zA-Z0-9-_\.]+\.html/).test(file);
+  })
+  .reduce(function (memo, file) {
+    memo[file.slice(0, -5)] = fs.readFileSync('templates/' + file).toString();
+    return memo;
+  }, {})
+  .value();
 
 app.set('templates', config.templates);
 
