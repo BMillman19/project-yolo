@@ -22,6 +22,10 @@ app.configure('development', function () {
   app.use(express.errorHandler());
 });
 
+app.configure('production', function () {
+  app.set('scripts', config.production.scripts);
+});
+
 app.get('/', routes.index);
 
 http.createServer(app).listen(app.get('port'), function () {
