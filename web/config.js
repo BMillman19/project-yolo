@@ -1,17 +1,21 @@
 var config = {};
 
 config.development = {
-  scripts: [
-    'javascripts/vendor/underscore.js',
-    'javascripts/vendor/backbone.js'
-  ]
+  scripts: {
+    libs: [
+      'javascripts/vendor/underscore.js',
+      'javascripts/vendor/backbone.js'
+    ]
+  }
 };
 
 config.production = {
-  scripts: [
-    'javascripts/vendor/underscore.min.js',
-    'javascripts/vendor/backbone.min.js'
-  ]
+  scripts: {
+    libs: [
+      'javascripts/vendor/underscore.min.js',
+      'javascripts/vendor/backbone.min.js'
+    ]
+  }
 };
 
 config.secret = 'eUWEUVYKRvfxMaZNgY4Q7eWV';

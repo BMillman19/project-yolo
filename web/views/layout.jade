@@ -34,8 +34,9 @@ html(class='no-js', lang='en')
     script
       window.jQuery || document.write("<script src=\"javascripts/vendor/jquery-1.7.2.min.js\"><\/script>")
 
-    each s in scripts
-      script(src=s)
+    each val, key in scripts
+      each s in val
+        script(src=s)
 
     script(src='javascripts/plugins.js')
     script(src='javascripts/script.js')
