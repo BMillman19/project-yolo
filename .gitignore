@@ -14,9 +14,6 @@ profile
 *.moved-aside
 ios/Pods
 
-# Brunch
-web/publish
-
 # Node
 node_modules
 npm-debug.log
