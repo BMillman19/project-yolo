@@ -7,7 +7,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPClient.h"
 
-@interface PromptAPI : NSObject
+@protocol PromptSessionDelegate;
+
+typedef void (^JSONResponseBlock)(NSDictionary* json);
+
+@interface PromptAPI : AFHTTPClient 
+
+@property(nonatomic, assign) id<PromptSessionDelegate> sessionDelegate;
+
+-(void)commandWithParams:(NSMutableDictionary*)params onCompletion:(JSONResponseBlock)completionBlock;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Your application should implement this delegate to receive session callbacks.
+ */
+@protocol PromptSessionDelegate <NSObject>
+
+
+- (void)sessionBegin;
+
+- (void)sessionExpired;
 
 @end

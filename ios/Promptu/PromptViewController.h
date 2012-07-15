@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 
-@interface PromptViewController : UIViewController
+@interface PromptViewController : ListViewController  <UITableViewDataSource, UITableViewDelegate>
 
 @end
