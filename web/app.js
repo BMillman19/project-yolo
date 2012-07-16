@@ -1,6 +1,7 @@
 var express = require('express')
   , fs = require('fs')
   , http = require('http')
+  , lessMiddleware = require('less-middleware')
   , _ = require('underscore')
   , routes = require('./routes')
   , config = require('./config');
@@ -15,6 +16,10 @@ app.configure(function () {
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  // app.use(lessMiddleware({
+  //   src: __dirname + '/public',
+  //   compress: true
+  // }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -30,8 +35,8 @@ config.templates = _.chain(fs.readdirSync('templates'))
   .value();
 
 app.set('templates', config.templates);
-
 app.configure('development', function () {
+  app.set('stylesheets', config.development.stylesheets);
   app.set('scripts', config.development.scripts);
   app.set('email', config.development.email);
   app.use(express.errorHandler());

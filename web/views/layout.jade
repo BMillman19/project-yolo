@@ -17,7 +17,11 @@ html(class='no-js', lang='en')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width')
 
-    link(rel='stylesheet', href='stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    each stylesheet in stylesheets
+      link(rel='stylesheet', href=stylesheet)
+
     script(src='javascripts/vendor/modernizr-2.5.3.min.js')
 
     each val, key in templates

@@ -3,8 +3,7 @@ var config = {};
 config.development = {
   stylesheets: [
     'stylesheets/bootstrap-responsive.css',
-    'stylesheets/bootstrap.css',
-    'style.css'
+    'stylesheets/bootstrap.css'
   ],
   scripts: {
     libs: [
