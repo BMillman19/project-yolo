@@ -24,13 +24,14 @@ config.development = {
     transport: {
       service: "Gmail",
       auth: {
-        user:  "promptuapp@gmail.com",
-        pass:  "6mbTkYe8uXcc"
+        user: "promptuapp@gmail.com",
+        pass: "6mbTkYe8uXcc"
       }
     },
-    options: {
+    defaults: {
       sender: 'promptU App <notifier@promptuapp.com>',
-      subject: 'New Notification from promptU'
+      subject: 'New Notification from promptU',
+      template: 'templates/email.html'
     }
   }
 };
