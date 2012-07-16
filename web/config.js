@@ -19,6 +19,19 @@ config.development = {
     controllers: [
       'javascripts/controllers/Router.js'
     ]
+  },
+  email: {
+    transport: {
+      service: "Gmail",
+      auth: {
+        user:  "promptuapp@gmail.com",
+        pass:  "6mbTkYe8uXcc"
+      }
+    },
+    options: {
+      sender: 'promptU App <notifier@promptuapp.com>',
+      subject: 'New Notification from promptU'
+    }
   }
 };
 
