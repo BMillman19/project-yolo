@@ -1,6 +1,34 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div#notifs
+  div.sideNav
+    p.triangle-isosceles.blue promptU
+    div(id="profileBox")
+      div.option
+        img(src="images/icons/gear.png")
+        | Account Settings
+      div.option
+        img(src="images/icons/site_map.png")
+        | Manage Owned Groups
+      div.option
+        img(src="images/icons/subscribed.png")
+        | Manage Subscribed Groups
+
+  div.hero-unit.span6
+    div.toolbar
+      div.search
+        img(src="images/icons/search.png")
+        input.search-query(type="text",placeholder="Search")
+      button.button.white(rel="tooltip",title="Filter by time")
+        img(src="images/icons/time.png")
+      button.button.white(rel="tooltip",title="Filter by priority")
+        img(src="images/icons/priority.png")
+      button.button.white(rel="tooltip",title="Filter by group")
+        img(src="images/icons/groups.png")
+      button.button.white(rel="tooltip",title="Filter by tag")
+        img(src="images/icons/tag.png")
+      button.button.white(rel="tooltip",title="Filter by author")
+        img(src="images/icons/author.png")
+      button.button.white(rel="tooltip",title="Filter by completion")
+        img(src="images/icons/completed.png")
+    div#notifs
