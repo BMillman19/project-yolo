@@ -37,6 +37,7 @@
       _.each(this.model.models, _.bind(function (userModel) {
         this.subviews[userModel.cid].render();
       }, this));
+      return this;
     }
   });
 
