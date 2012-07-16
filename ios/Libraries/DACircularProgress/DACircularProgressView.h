@@ -12,13 +12,9 @@
 
 @interface DACircularProgressView : UIView
 
-@property(nonatomic, retain) UIColor *trackTintColor;
-@property(nonatomic, retain) UIColor *progressTintColor;
-@property(nonatomic, retain) NSTimer *timer;
-@property(nonatomic, assign) BOOL roundedCorners;
-@property(nonatomic, assign) CGFloat progress;
-
-- (void)startAnimating;
-- (void)stopAnimating;
+@property(nonatomic, strong) UIColor *trackTintColor;
+@property(nonatomic, strong) UIColor *progressTintColor;
+@property(nonatomic) BOOL roundedCorners;
+@property(nonatomic) CGFloat progress;
 
 @end

@@ -7,15 +7,29 @@
 //
 
 #import "PromptViewController.h"
+
 #import "PrettyKit.h"
+#import "MGScrollView.h"
+#import "MGStyledBox.h"
+#import "MGBoxLine.h"
+#import "PromptCenter.h"
+#import "PUPromptBox.h"
+#import "PUPrompt.h"
 
 @implementation PromptViewController
+
+@synthesize prompts;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [(PromptCenter *)[PromptCenter sharedInstance] fetchPrompts:234234 withCallback:
+            ^(long userId, id result, NSError* error) {
+                if(!error) {
+                    prompts = result;
+                }
+            }];
     }
     return self;
 }
@@ -35,68 +49,120 @@
     [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    if (section == 0) {
-        return 1;
-    }
-    if (section == 1) {
-        return 1;
+- (void)addBox:(UIButton *)sender {
+    MGStyledBox *box = [MGStyledBox box];
+    MGBox *parentBox = [self parentBoxOf:sender];
+    if (parentBox) {
+        int i = [self.scroller.boxes indexOfObject:parentBox];
+        [self.scroller.boxes insertObject:box atIndex:i + 1];
+    } else {
+        [self.scroller.boxes addObject:box];
     }
     
-    return 0;
+    UIButton *up = [self button:@"up" for:@selector(moveUp:)];
+    UIButton *down = [self button:@"down" for:@selector(moveDown:)];
+    UIButton *add = [self button:@"add" for:@selector(addBox:)];
+    UIButton *remove = [self button:@"remove" for:@selector(removeBox:)];
+    UIButton *shuffle = [self button:@"shuffle" for:@selector(shuffle)];
+    
+    NSArray *left = [NSArray arrayWithObjects:up, down, nil];
+    NSArray *right = [NSArray arrayWithObjects:shuffle, remove, add, nil];
+    
+    MGBoxLine *line = [MGBoxLine lineWithLeft:left right:right];
+    [box.topLines addObject:line];
+    
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+    [self.scroller flashScrollIndicators];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;  
+- (void)removeBox:(UIButton *)sender {
+    MGBox *parentBox = [self parentBoxOf:sender];
+    [self.scroller.boxes removeObject:parentBox];
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+}
+
+- (void)moveUp:(UIButton *)sender {
+    MGBox *parentBox = [self parentBoxOf:sender];
+    int i = [self.scroller.boxes indexOfObject:parentBox];
+    if (!i) {
+        return;
     }
-
-    
-    // Configure the cell...
-    [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
-    cell.cornerRadius = 10;
-    
-    
-    return cell;
+    [self.scroller.boxes removeObject:parentBox];
+    [self.scroller.boxes insertObject:parentBox atIndex:i - 1];
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return [NSString stringWithFormat:@"Section %i", section];
+- (void)moveDown:(UIButton *)sender {
+    MGBox *parentBox = [self parentBoxOf:sender];
+    int i = [self.scroller.boxes indexOfObject:parentBox];
+    if (i == [self.scroller.boxes count] - 1) {
+        return;
+    }
+    [self.scroller.boxes removeObject:parentBox];
+    [self.scroller.boxes insertObject:parentBox atIndex:i + 1];
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate
-
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView.rowHeight + [PrettyTableViewCell tableView:tableView neededHeightForIndexPath:indexPath];
+- (MGBox *)parentBoxOf:(UIView *)view {
+    while (![view.superview isKindOfClass:[MGBox class]]) {
+        if (!view.superview) {
+            return nil;
+        }
+        view = view.superview;
+    }
+    return (MGBox *)view.superview;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (UIButton *)button:(NSString *)title for:(SEL)selector {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
+    [button setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9]
+             forState:UIControlStateNormal];
+    [button setTitleShadowColor:[UIColor colorWithWhite:0.2 alpha:0.9]
+                   forState:UIControlStateNormal];
+    button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    CGSize size = [title sizeWithFont:button.titleLabel.font];
+    button.frame = CGRectMake(0, 0, size.width + 18, 26);
+    [button setTitle:title forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    button.layer.cornerRadius = 3;
+    button.backgroundColor = self.view.backgroundColor;
+    button.layer.shadowColor = [UIColor blackColor].CGColor;
+    button.layer.shadowOffset = CGSizeMake(0, 1);
+    button.layer.shadowRadius = 0.8;
+    button.layer.shadowOpacity = 0.6;
+    return button;
 }
+
+- (void)shuffle {
+    NSMutableArray *shuffled =
+    [NSMutableArray arrayWithCapacity:[self.scroller.boxes count]];
+    for (id box in self.scroller.boxes) {
+        int i = arc4random() % ([shuffled count] + 1);
+        [shuffled insertObject:box atIndex:i];
+    }
+    self.scroller.boxes = shuffled;
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+}
+
+
+
+
+
+//#pragma mark - UIScrollViewDelegate (for snapping boxes to edges)
+//
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    if (!_reloading) {
+//        [(MGScrollView *)scrollView snapToNearestBox];
+//    }
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+//                  willDecelerate:(BOOL)decelerate {
+//    if (!decelerate && !_reloading) {
+//        [(MGScrollView *)scrollView snapToNearestBox];
+//    }
+//}
 
 #pragma mark - View lifecycle
 
@@ -107,7 +173,7 @@
     self.navigationItem.title = @"PromptU";
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 											   target:self 
 											   action:@selector(onComposeClick:)] autorelease];
     
@@ -119,7 +185,46 @@
 		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ButtonMenu.png"]  style:UIBarButtonItemStyleBordered target:self.navigationController.parentViewController action:@selector(revealToggle:)];
 	}
     
-    self.table.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+
+    
+    self.scroller.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:PU_PATTERN]];
+    //self.scroller.backgroundColor = [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
+
+
+    self.scroller.alwaysBounceVertical = YES;
+    
+//    // add a moveable box
+//   [self addBox:nil];
+//    
+    for (int i = 0; i < [self.prompts count]; i++) {
+        PUPromptBox *box = [PUPromptBox promptBoxWithPosition:i];
+        box.delegate = self;
+        box.dataSource = self;
+        [self.scroller.boxes addObject:box];
+    }
+    
+    // add a new MGBox to the MGScrollView
+    MGStyledBox *box1 = [MGStyledBox box];
+    [self.scroller.boxes addObject:box1];
+    
+    // add some MGBoxLines to the box
+    MGBoxLine *head1 =
+    [MGBoxLine lineWithLeft:@"Left And Right Content" right:nil];
+    [box1.topLines addObject:head1];
+    
+    UISwitch *toggle = [[UISwitch alloc] initWithFrame:CGRectZero];
+    toggle.on = YES;
+    MGBoxLine *line1 =
+    [MGBoxLine lineWithLeft:@"NSString and UISwitch" right:toggle];
+    [box1.topLines addObject:line1];
+
+    
+    // draw all the boxes and animate as appropriate
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+    [self.scroller flashScrollIndicators];
+    
+
+                                                                
 }
 
 - (void)viewDidUnload
@@ -131,5 +236,33 @@
 {
     return YES;
 }
+
+#pragma mark - PUPromptBoxDelegate 
+
+- (void)promptBoxDidExpand:(PUPromptBox *)promptBox
+{
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+}
+
+- (void)promptBoxDidDissmiss:(PUPromptBox *)promptBox
+{
+    ((PUPrompt *)[self.prompts objectAtIndex:promptBox.position]).dissmissed = YES;
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+}
+
+- (void)promptBoxDidUndissmiss:(PUPromptBox *)promptBox
+{
+    ((PUPrompt *)[self.prompts objectAtIndex:promptBox.position]).dissmissed = NO;
+    [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
+}
+
+#pragma mark - PUPromptBoxDataSource
+
+- (PUPrompt *)promptAtPosition:(int)position
+{
+    return [self.prompts objectAtIndex:position];
+}
+
+
 
 @end

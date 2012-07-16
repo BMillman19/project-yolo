@@ -10,4 +10,16 @@
 
 @implementation PUPrompt
 
+@synthesize uId, authorId, groupId, header, body, priority, tags, sendDate, dueDate, dissmissed;
+
+- (void)dealloc
+{
+    [header release];
+    [body release];
+    [tags release];
+    [sendDate release];
+    [dueDate release];
+    [super dealloc];
+}
+
 @end

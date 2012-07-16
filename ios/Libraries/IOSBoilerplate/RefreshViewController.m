@@ -1,36 +1,18 @@
 //
-//  ListViewController.m
-//  IOSBoilerplate
+//  RefreshViewController.m
+//  Promptu
 //
-//  Copyright (c) 2011 Alberto Gimeno Brieba
-//  
-//  Permission is hereby granted, free of charge, to any person
-//  obtaining a copy of this software and associated documentation
-//  files (the "Software"), to deal in the Software without
-//  restriction, including without limitation the rights to use,
-//  copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the
-//  Software is furnished to do so, subject to the following
-//  conditions:
-//  
-//  The above copyright notice and this permission notice shall be
-//  included in all copies or substantial portions of the Software.
-//  
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-//  OTHER DEALINGS IN THE SOFTWARE.
-//  
+//  Created by Brandon Millman on 7/15/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
 
-#import "ListViewController.h"
+#import "RefreshViewController.h"
 
-@implementation ListViewController
+#import "MGScrollView.h"
 
-@synthesize table;
+@implementation RefreshViewController
+
+@synthesize scroller;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,9 +36,9 @@
 	
 	if (_refreshHeaderView == nil) {
 		
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.table.bounds.size.height, self.view.frame.size.width, self.table.bounds.size.height)];
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f -[self.scroller bounds].size.height, self.view.frame.size.width, [self.scroller bounds].size.height)];        
 		view.delegate = self;
-		[self.table addSubview:view];
+		[self.scroller addSubview:view];
 		_refreshHeaderView = view;
 		[view release];
 		
@@ -77,7 +59,7 @@
 - (void)doneLoadingTableViewData {
 	//  model should call this when its done loading
 	_reloading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.table];
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.scroller];
 }
 
 
@@ -133,7 +115,7 @@
 }
 
 - (void)dealloc {
-    [table release];
+    [scroller release];
 	_refreshHeaderView = nil;
     [super dealloc];
 }
