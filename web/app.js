@@ -1,10 +1,29 @@
 var express = require('express')
   , fs = require('fs')
   , http = require('http')
+  , sys = require('sys')
+  , exec = require('child_process').exec
   , _ = require('underscore')
   , config = require('./config');
 
+var puts = function (error, stdout, stderr) {
+  sys.puts(stdout);
+  sys.puts(stderr);
+};
+_.chain(fs.readdirSync('public/stylesheets/'))
+  .filter(function (file) {
+    // return (/^[a-zA-Z0-9\-_\.]+\.less/).test(file);
+    return (/^style.less/).test(file);
+  })
+  .each(function (file) {
+    var path = __dirname + '/public/stylesheets/'
+      , cmd = 'lessc ' + path + file + ' > ' + path + file.replace('less', 'css');
+    exec(cmd, puts);
+  });
+
 app = express();
+
+
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -41,8 +60,8 @@ var routes = _.chain(fs.readdirSync('routes/'))
   }, {});
 
 app.set('templates', config.templates);
-
 app.configure('development', function () {
+  app.set('stylesheets', config.development.stylesheets);
   app.set('scripts', config.development.scripts);
   app.set('email', config.development.email);
   app.use(express.errorHandler());
