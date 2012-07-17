@@ -1,34 +1,36 @@
 extends layout
 
 block content
-  div.sideNav
-    p.triangle-isosceles.blue promptU
-    div(id="profileBox")
-      div.option
-        img(src="images/icons/gear.png")
-        | Account Settings
-      div.option
-        img(src="images/icons/site_map.png")
-        | Manage Owned Groups
-      div.option
-        img(src="images/icons/subscribed.png")
-        | Manage Subscribed Groups
+  div#main.row-fluid
+    div#sidebar.span4
+      div.triangle-isosceles.blue promptU
+      div#options
+        div.option
+          img.icon(src="images/icons/gear.png")
+          | Account Settings
+        div.option
+          img.icon(src="images/icons/site_map.png")
+          | Manage Owned Groups
+        div.option
+          img.icon(src="images/icons/subscribed.png")
+          | Manage Subscribed Groups
 
-  div.hero-unit.span6
-    div.toolbar
-      div.search
-        img(src="images/icons/search.png")
-        input.search-query(type="text",placeholder="Search")
-      button.button.white(rel="tooltip",title="Filter by time")
-        img(src="images/icons/time.png")
-      button.button.white(rel="tooltip",title="Filter by priority")
-        img(src="images/icons/priority.png")
-      button.button.white(rel="tooltip",title="Filter by group")
-        img(src="images/icons/groups.png")
-      button.button.white(rel="tooltip",title="Filter by tag")
-        img(src="images/icons/tag.png")
-      button.button.white(rel="tooltip",title="Filter by author")
-        img(src="images/icons/author.png")
-      button.button.white(rel="tooltip",title="Filter by completion")
-        img(src="images/icons/completed.png")
-    div#notifs
+    div#content.span8
+      div#toolbar.row-fluid
+        div.search.span4
+          input.search-box(type="text",placeholder="Search")
+          img(src="images/icons/search.png")
+        div.buttons.span6
+          button.white(rel="tooltip",title="Filter by time")
+            img.icon(src="images/icons/time.png")
+          button.white(rel="tooltip",title="Filter by priority")
+            img.icon(src="images/icons/priority.png")
+          button.white(rel="tooltip",title="Filter by group")
+            img.icon(src="images/icons/groups.png")
+          button.white(rel="tooltip",title="Filter by tag")
+            img.icon(src="images/icons/tag.png")
+          button.white(rel="tooltip",title="Filter by author")
+            img.icon(src="images/icons/author.png")
+          button.white(rel="tooltip",title="Filter by completion")
+            img.icon(src="images/icons/completed.png")
+      div#notifs

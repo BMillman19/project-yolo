@@ -1,12 +1,30 @@
 var express = require('express')
   , fs = require('fs')
   , http = require('http')
-  , lessMiddleware = require('less-middleware')
+  , sys = require('sys')
+  , exec = require('child_process').exec
   , _ = require('underscore')
   , routes = require('./routes')
   , config = require('./config');
 
+var puts = function (error, stdout, stderr) {
+  sys.puts(stdout);
+  sys.puts(stderr);
+};
+_.chain(fs.readdirSync('public/stylesheets/'))
+  .filter(function (file) {
+    // return (/^[a-zA-Z0-9\-_\.]+\.less/).test(file);
+    return (/^style.less/).test(file);
+  })
+  .each(function (file) {
+    var path = __dirname + '/public/stylesheets/'
+      , cmd = 'lessc ' + path + file + ' > ' + path + file.replace('less', 'css');
+    exec(cmd, puts);
+  });
+
 app = express();
+
+
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -16,10 +34,6 @@ app.configure(function () {
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  // app.use(lessMiddleware({
-  //   src: __dirname + '/public',
-  //   compress: true
-  // }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });

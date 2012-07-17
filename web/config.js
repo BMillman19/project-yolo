@@ -7,6 +7,7 @@ config.development = {
   ],
   scripts: {
     libs: [
+      // 'javascripts/vendor/jquery-1.7.2.js',
       'javascripts/vendor/underscore.js',
       'javascripts/vendor/backbone.js'
     ],
