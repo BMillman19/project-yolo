@@ -58,8 +58,6 @@ var routes = _.chain(fs.readdirSync('routes/'))
   }, {})
   .value();
 
-console.log(routes);
-
 app.set('templates', config.templates);
 app.configure('development', function () {
   app.set('stylesheets', config.development.stylesheets);
