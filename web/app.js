@@ -23,8 +23,6 @@ _.chain(fs.readdirSync('public/stylesheets/'))
 
 app = express();
 
-
-
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -42,7 +40,7 @@ config.templates = _.chain(fs.readdirSync('templates'))
     return (/^[\w\-\.]+\.html$/).test(file);
   })
   .reduce(function (memo, file) {
-    console.log('Loading template ' + file)
+    console.log('Loading template ' + file);
     memo[file.slice(0, -5)] = fs.readFileSync('templates/' + file).toString();
     return memo;
   }, {})
@@ -57,7 +55,10 @@ var routes = _.chain(fs.readdirSync('routes/'))
     console.log('Loading route ' + file);
     var newRoute = require('./routes/' + file.slice(0, -3));
     return _.extend(memo, newRoute);
-  }, {});
+  }, {})
+  .value();
+
+console.log(routes);
 
 app.set('templates', config.templates);
 app.configure('development', function () {
