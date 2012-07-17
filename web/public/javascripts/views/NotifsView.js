@@ -17,13 +17,13 @@
       var tagName = $(e.target).html();
       this.model.each(_.bind(function (model) {
         if (!_.include(model.get('tags'), tagName)) {
-          this.subviews[model.cid].$el.hide();
+          this.subviews[model.cid].$el.fadeOut(400);
         }
       }, this));
     },
     resetSelection: function () {
       this.model.each(_.bind(function (model) {
-        this.subviews[model.cid].$el.show();
+        this.subviews[model.cid].$el.fadeIn(400);
       }, this));
     },
     addNotif: function (notifModel) {
