@@ -6,6 +6,10 @@ var express = require('express')
   , _ = require('underscore')
   , config = require('./config');
 
+mongoose = require('mongoose');
+mongoose.connect(process.env.PROMPTU_MONGO_URI || 'mongodb://localhost/promptu');
+Models = require('./models/models');
+
 var puts = function (error, stdout, stderr) {
   sys.puts(stdout);
   sys.puts(stderr);
@@ -27,6 +31,8 @@ app.configure(function () {
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.set('models', require('./models/models'));
+  app.set('config', config.universal);
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -73,6 +79,10 @@ app.configure('production', function () {
 
 // ROUTES
 app.get('/', routes.index);
+
+app.get('/auth', routes.auth);
+app.post('/signup', routes.signup);
+
 app.post('/notif', routes.notif);
 
 

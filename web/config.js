@@ -70,7 +70,10 @@ config.production = {
   }
 };
 
-config.secret = 'eUWEUVYKRvfxMaZNgY4Q7eWV';
-config.sessionTimeout = 4; // hours
+config.universal = {
+  secret: 'eUWEUVYKRvfxMaZNgY4Q7eWV',
+  sessionTimeout: 4,
+  bcryptRounds: 10
+}
 
 module.exports = config;
