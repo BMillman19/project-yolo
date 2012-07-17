@@ -26,7 +26,6 @@ exports.genSessionToken = function (clientToken) {
 // Encrypts string using bcrypt
 exports.bcrypt = function (str, rounds) {
   rounds = (typeof rounds !== 'undefined') ? rounds : app.settings.config.bcryptRounds;
-  console.log(str,rounds);
   return bcrypt.hashSync(str, rounds);
 }
 
