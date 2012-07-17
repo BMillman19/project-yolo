@@ -13,7 +13,7 @@ var puts = function (error, stdout, stderr) {
 _.chain(fs.readdirSync('public/stylesheets/'))
   .filter(function (file) {
     // return (/^[a-zA-Z0-9\-_\.]+\.less/).test(file);
-    return (/^style.less/).test(file);
+    return (/^style\.less/).test(file);
   })
   .each(function (file) {
     var path = __dirname + '/public/stylesheets/'
