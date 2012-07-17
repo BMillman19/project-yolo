@@ -6,10 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define TEXT_COLOR [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]
+#define TEXT_COLOR [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
 
-#define TEXT_COLOR_LIGHT [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.3f]
+#define TEXT_COLOR_LIGHT [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3f]
 
-#define REFRESH_PATTERN @"gplaypattern.png"
+#define PU_PATTERN @"gplaypattern.png"
+
+#define ANIM_SPEED 0.6
+
+#define TITLE_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:16]
 
 

@@ -11,6 +11,7 @@
 #import "PromptViewController.h"
 #import "FilterViewController.h"
 #import "RevealController.h"
+#import "PrettyKit.h"
 
 @implementation PromptAppDelegate
 
@@ -26,16 +27,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    
-    
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window = window;
 	
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     
     PromptViewController* frontViewController = [[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil];	
     FilterViewController *rearViewController = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];	
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
+    UINib *nib = [UINib nibWithNibName:@"NavBar" bundle:nil];
+	UINavigationController *navigationController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    
+    [navigationController pushViewController:frontViewController animated:NO];
+    
+    PrettyNavigationBar *navBar = (PrettyNavigationBar *)navigationController.navigationBar;
+    
+    navBar.topLineColor = [UIColor colorWithHex:0x00ADEE];
+    navBar.gradientStartColor = [UIColor colorWithHex:0x00ADEE];
+    navBar.gradientEndColor = [UIColor colorWithHex:0x0078A5];
+    navBar.bottomLineColor = [UIColor colorWithHex:0x0078A5];
+    navBar.tintColor = navBar.gradientEndColor;
+    
 	RevealController *revealController = [[RevealController alloc] initWithFrontViewController:navigationController rearViewController:rearViewController];
 	self.viewController = revealController;
 	

@@ -44,8 +44,9 @@ typedef enum{
 	UILabel *_lastUpdatedLabel;
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
-	UIActivityIndicatorView *_activityView;
+	//UIActivityIndicatorView *_activityView;
 	DACircularProgressView *_progressView;
+    NSTimer *_timer;
 
 }
 

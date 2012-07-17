@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ListViewController.h"
+#import "RefreshViewController.h"
+#import "PUPromptBox.h"
 
-@interface PromptViewController : ListViewController  <UITableViewDataSource, UITableViewDelegate>
+@interface PromptViewController : RefreshViewController <PUPromptBoxDelegate, PUPromptBoxDataSource>
+
+@property (nonatomic, retain) NSMutableArray *prompts;
 
 @end

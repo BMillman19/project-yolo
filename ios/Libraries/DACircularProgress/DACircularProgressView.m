@@ -14,39 +14,8 @@
 
 @synthesize trackTintColor = _trackTintColor;
 @synthesize progressTintColor =_progressTintColor;
-@synthesize timer = _timer;
 @synthesize roundedCorners = _roundedCorners;
 @synthesize progress = _progress;
-
-- (void)dealloc
-{
-    [_trackTintColor release];
-    [_progressTintColor release]; 
-    [_timer release];
-    [super dealloc];
-}
-
-- (void)startAnimating
-{
-    self.hidden = NO;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(progressChange) userInfo:nil repeats:YES];
-}
-
-- (void)stopAnimating
-{
-    self.hidden = YES;
-    if (_timer) {
-        [_timer invalidate];
-        _timer = nil;
-    }
-}
-
-- (void)progressChange
-{
-    _progress += 0.01;
-    if (_progress > 1.0f)
-        _progress = 0.0f;
-}
 
 - (float)progress
 {
@@ -74,7 +43,6 @@
     {
         self.backgroundColor = [UIColor clearColor];
         _roundedCorners = DA_ROUNDED_CORNERS_DEFAULT;
-        self.hidden = YES;
     }
     return self;
 }
