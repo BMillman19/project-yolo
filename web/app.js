@@ -2,7 +2,6 @@ var express = require('express')
   , fs = require('fs')
   , http = require('http')
   , _ = require('underscore')
-  , routes = require('./routes')
   , config = require('./config');
 
 app = express();
@@ -21,13 +20,25 @@ app.configure(function () {
 
 config.templates = _.chain(fs.readdirSync('templates'))
   .filter(function (file) {
-    return (/^[a-zA-Z0-9\-_\.]+\.html/).test(file);
+    return (/^[\w\-\.]+\.html$/).test(file);
   })
   .reduce(function (memo, file) {
+    console.log('Loading template ' + file)
     memo[file.slice(0, -5)] = fs.readFileSync('templates/' + file).toString();
     return memo;
   }, {})
   .value();
+
+// Load all routes in ./routes/
+var routes = _.chain(fs.readdirSync('routes/'))
+  .filter(function (file) {
+    return (/^[\w\-\.]+\.js$/).test(file);
+  })
+  .reduce(function (memo, file) {
+    console.log('Loading route ' + file);
+    var newRoute = require('./routes/' + file.slice(0, -3));
+    return _.extend(memo, newRoute);
+  }, {});
 
 app.set('templates', config.templates);
 
