@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MGScrollView : UIScrollView
+@interface MGScrollView : UITableView
 
 @property (nonatomic, retain) NSMutableArray *boxes;
 

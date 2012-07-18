@@ -9,7 +9,7 @@
 #import "PromptAppDelegate.h"
 
 #import "PromptViewController.h"
-#import "FilterViewController.h"
+#import "MenuViewController.h"
 #import "RevealController.h"
 #import "PrettyKit.h"
 
@@ -33,7 +33,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     
     PromptViewController* frontViewController = [[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil];	
-    FilterViewController *rearViewController = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];	
+    MenuViewController *rearViewController = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
+	//rearViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rebel"]];
     UINib *nib = [UINib nibWithNibName:@"NavBar" bundle:nil];
 	UINavigationController *navigationController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
     

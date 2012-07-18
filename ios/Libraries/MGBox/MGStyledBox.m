@@ -6,6 +6,9 @@
 
 #import "MGStyledBox.h"
 
+#import "UIColor+CreateMethods.h"
+
+
 #define DEFAULT_WIDTH          304.0
 #define DEFAULT_TOP_MARGIN      10.0
 #define DEFAULT_LEFT_MARGIN      8.0
@@ -25,13 +28,13 @@
 
 + (id)box {
     CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, DEFAULT_WIDTH, 0);
-    MGStyledBox *box = [[self alloc] initWithFrame:frame];
+    MGStyledBox *box = [[[self class] alloc] initWithFrame:frame];
     return box;
 }
 
 + (id)boxWithWidth:(CGFloat)width {
     CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, width, 0);
-    MGStyledBox *box = [[self alloc] initWithFrame:frame];
+    MGStyledBox *box = [[[self class] alloc] initWithFrame:frame];
     return box;
 }
 

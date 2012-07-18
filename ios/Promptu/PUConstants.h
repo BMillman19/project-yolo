@@ -16,4 +16,6 @@
 
 #define TITLE_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:16]
 
+#define OTHER_FONT [UIFont fontWithName:@"HelveticaNeue-Light" size:14]
+
 

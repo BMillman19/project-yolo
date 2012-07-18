@@ -8,6 +8,7 @@
 #import "MGBoxProtocol.h"
 
 #define BOTTOM_MARGIN 10.0
+#define kOffset 40
 
 @implementation MGScrollView
 
@@ -35,7 +36,7 @@
     [boxes makeObjectsPerformSelector:@selector(draw)];
 
     // set y for new top boxes
-    CGFloat offsetY = 0;
+    CGFloat offsetY = kOffset;
     NSMutableArray *newTopBoxes = [NSMutableArray array];
     for (UIView <MGBoxProtocol> *box in boxes) {
         if (box.isReplacement) {
@@ -62,7 +63,7 @@
     }
 
     // prep pre animation y positions for remaining new boxes
-    CGFloat preAnimY = 0;
+    CGFloat preAnimY = kOffset;
     for (UIView <MGBoxProtocol> *box in boxes) {
         if ([newTopBoxes indexOfObject:box] != NSNotFound) {
             continue; // new top boxes are already positioned
@@ -97,7 +98,7 @@
         }
 
         // new/existing boxes move & fade in
-        CGFloat finalY = 0;
+        CGFloat finalY = kOffset;
         for (UIView <MGBoxProtocol> *box in boxes) {
             CGPoint pos = box.frame.origin;
             CGSize size = box.frame.size;
@@ -135,7 +136,7 @@
     CGPoint offset = self.contentOffset;
     CGFloat fromBottom = self.contentSize.height - (offset.y + size.height);
     CGFloat fromTop = offset.y;
-    CGFloat newY = 0;
+    CGFloat newY = kOffset;
 
     // near the bottom? then snap to
     UIView *last = [self.boxes lastObject];

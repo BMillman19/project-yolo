@@ -15,10 +15,18 @@
 #import "PromptCenter.h"
 #import "PUPromptBox.h"
 #import "PUPrompt.h"
+#import "ImageBox.h"
+#import "MGImageView.h"
+#import "SearchBox.h"
 
 @implementation PromptViewController
 
 @synthesize prompts;
+
+- (void)dealloc{
+    [prompts release];
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,12 +49,11 @@
 
 
 //// This is the core method you should implement
-- (void)reloadTableViewDataSource {
-	_reloading = YES;
-
+- (void)reloadDataSource {
+    [super reloadDataSource];
     // Here you would make an HTTP request or something like that
     // Call [self doneLoadingTableViewData] when you are done
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+    [self performSelector:@selector(doneLoadingData) withObject:nil afterDelay:3.0];
 }
 
 - (void)addBox:(UIButton *)sender {
@@ -170,7 +177,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"PromptU";
+    self.navigationItem.title = @"Promptu";
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
@@ -187,7 +194,9 @@
     
 
     
-    self.scroller.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:PU_PATTERN]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:PU_PATTERN]];
+    self.scroller.backgroundColor = [UIColor clearColor];
+
     //self.scroller.backgroundColor = [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
 
 
@@ -203,20 +212,43 @@
         [self.scroller.boxes addObject:box];
     }
     
-    // add a new MGBox to the MGScrollView
     MGStyledBox *box1 = [MGStyledBox box];
-    [self.scroller.boxes addObject:box1];
+    self.footer = box1;
+    
+    //self.header = [SearchBox boxWithParent:self];
+    
+
+    
+
     
     // add some MGBoxLines to the box
+//    UILabel *time = [[UILabel alloc] initWithFrame:CGRectZero];
+//    time.text = @"24m";
+//    time.backgroundColor = [UIColor clearColor];
+
     MGBoxLine *head1 =
     [MGBoxLine lineWithLeft:@"Left And Right Content" right:nil];
+    head1.font = TITLE_FONT;
     [box1.topLines addObject:head1];
+//    MGImageView *view = [MGImageView imageView];
+//    [view setImage:[UIImage imageNamed: @"wood_pattern.png"]];
+//    self.footer = [MGImageView imageView];
+//    [self.scroller.boxes addObject:view];
     
-    UISwitch *toggle = [[UISwitch alloc] initWithFrame:CGRectZero];
-    toggle.on = YES;
-    MGBoxLine *line1 =
-    [MGBoxLine lineWithLeft:@"NSString and UISwitch" right:toggle];
-    [box1.topLines addObject:line1];
+//    // add a new MGBox to the MGScrollView
+//    MGStyledBox *box1 = [MGStyledBox box];
+//    [self.scroller.boxes addObject:box1];
+    
+//    // add some MGBoxLines to the box
+//    MGBoxLine *head1 =
+//    [MGBoxLine lineWithLeft:@"Left And Right Content" right:nil];
+//    [box1.topLines addObject:head1];
+//    
+//    UISwitch *toggle = [[UISwitch alloc] initWithFrame:CGRectZero];
+//    toggle.on = YES;
+//    MGBoxLine *line1 =
+//    [MGBoxLine lineWithLeft:@"NSString and UISwitch" right:toggle];
+//    [box1.topLines addObject:line1];
 
     
     // draw all the boxes and animate as appropriate
@@ -241,6 +273,11 @@
 
 - (void)promptBoxDidExpand:(PUPromptBox *)promptBox
 {
+    [self.scroller drawBoxesWithSpeed:0.0];
+}
+
+- (void)promptBoxDidCompress:(PUPromptBox *)promptBox
+{
     [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
 }
 
@@ -262,6 +299,8 @@
 {
     return [self.prompts objectAtIndex:position];
 }
+
+
 
 
 

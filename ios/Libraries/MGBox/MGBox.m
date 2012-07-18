@@ -32,7 +32,7 @@
 
 + (id)box {
     CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, DEFAULT_WIDTH, 0);
-    MGBox *box = [[self alloc] initWithFrame:frame];
+    MGBox *box = [[[self class] alloc] initWithFrame:frame];
     [box addLayers];
     return box;
 }
