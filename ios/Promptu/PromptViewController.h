@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RefreshViewController.h"
+
+#import <UIKit/UIKit.h>
 #import "PUPromptBox.h"
+#import "MGBoxProtocol.h"
 
 @interface PromptViewController : RefreshViewController <PUPromptBoxDelegate, PUPromptBoxDataSource>
 

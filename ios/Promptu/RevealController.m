@@ -33,7 +33,7 @@
 #import "RevealController.h"
 
 #import "PromptViewController.h"
-#import "FilterViewController.h"
+#import "MenuViewController.h"
 
 @implementation RevealController
 

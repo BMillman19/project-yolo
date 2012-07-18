@@ -28,6 +28,7 @@
 
 @required
 - (void)promptBoxDidExpand:(PUPromptBox *)promptBox;
+- (void)promptBoxDidCompress:(PUPromptBox *)promptBox;
 - (void)promptBoxDidDissmiss:(PUPromptBox *)promptBox;
 - (void)promptBoxDidUndissmiss:(PUPromptBox *)promptBox;
 

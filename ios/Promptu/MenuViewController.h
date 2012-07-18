@@ -1,5 +1,5 @@
 //
-//  FilterViewController.h
+//  MenuViewController.h
 //  Promptu
 //
 //  Created by Brandon Millman on 7/15/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterViewController : UIViewController
+@interface MenuViewController : UIViewController
 
 @end

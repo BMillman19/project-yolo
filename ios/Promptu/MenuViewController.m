@@ -1,18 +1,18 @@
 //
-//  FilterViewController.m
+//  MenuViewController.m
 //  Promptu
 //
 //  Created by Brandon Millman on 7/15/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FilterViewController.h"
+#import "MenuViewController.h"
 
-@interface FilterViewController ()
+@interface MenuViewController ()
 
 @end
 
-@implementation FilterViewController
+@implementation MenuViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

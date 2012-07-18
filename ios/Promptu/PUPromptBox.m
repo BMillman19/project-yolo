@@ -10,6 +10,9 @@
 
 #import "MGBoxLine.h"
 #import "PUPrompt.h"
+#import "TextBadge.h"
+#import "BlueBadge.h"
+#import "BadgeLabel.h"
 
 #define DEFAULT_WIDTH          304.0
 #define DEFAULT_TOP_MARGIN      10.0
@@ -23,7 +26,7 @@
 + (id)promptBoxWithPosition:(int)aPosition
 {
     CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, DEFAULT_WIDTH, 0);
-    PUPromptBox *box = [[self alloc] initWithFrame:frame withPosition:aPosition];
+    PUPromptBox *box = [[[self class] alloc] initWithFrame:frame withPosition:aPosition];
     return box;
 }
 
@@ -56,16 +59,32 @@
     PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
 
     if (!isExpanded) {
-        MGBoxLine *body = [MGBoxLine multilineWithText:prompt.body font:nil padding:24];
+        MGBoxLine *body = [MGBoxLine multilineWithText:prompt.body font:nil padding:12];
         [self.topLines addObject:body];
+        
+        NSMutableArray *tagBadges = [[NSMutableArray alloc] init];
+        
+        for(NSString * tag in prompt.tags) {
+            BadgeLabel *badge = [[BadgeLabel alloc] initWithFrame:CGRectZero];
+            [badge setStyle:BadgeLabelStyleAppIcon];
+            [badge setText:tag];
+            [tagBadges addObject:badge];
+        }
+
+        MGBoxLine *footer = [MGBoxLine lineWithLeft:tagBadges right:nil];
+        [self.topLines addObject:footer];
+        
+        [self.delegate promptBoxDidExpand:self];
     } else {
         [self.topLines removeAllObjects];
-        MGBoxLine *header = [MGBoxLine lineWithLeft:prompt.header right:nil];
+        NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:@"p0"], prompt.header, nil];
+        MGBoxLine *header = [MGBoxLine lineWithLeft:left right:@"24m"];
+        header.rightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
         header.font = TITLE_FONT;
         [self.topLines addObject:header];
+        [self.delegate promptBoxDidCompress:self];
     }
     self.isExpanded = !self.isExpanded;
-    [self.delegate promptBoxDidExpand:self];
 }
 
 - (void)handleSwipe
@@ -73,10 +92,10 @@
     PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
 
     if (!prompt.dissmissed) {
-        self.alphaValue = 0.5;
+        //[self setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.5]];        
         [self.delegate promptBoxDidDissmiss:self];
     } else {
-        self.alphaValue = 1.0;
+        //[self setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:1.0]];        
         [self.delegate promptBoxDidUndissmiss:self];
     }
 
@@ -85,7 +104,9 @@
 - (void)setDataSource:(id<PUPromptBoxDataSource>)aDataSource {
     dataSource = aDataSource;
     PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
-    MGBoxLine *header = [MGBoxLine lineWithLeft:prompt.header right:nil];
+    NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:@"p0"], prompt.header, nil];
+    MGBoxLine *header = [MGBoxLine lineWithLeft:left right:@"24m"];
+    header.rightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
     header.font = TITLE_FONT;
     [self.topLines addObject:header];
     
@@ -96,9 +117,7 @@
 
 //- (void)drawRect:(CGRect)rect
 //{
-//    self.alpha = alphaValue;
-//    [super drawRect:rect];
-//
+//    self.layer.
 //}
 
 
