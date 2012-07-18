@@ -15,7 +15,6 @@ config.development = {
       'javascripts/models/Notif.js'
     ],
     views: [
-      'javascripts/views/NotifView.js',
       'javascripts/views/NotifsView.js'
     ],
     collections: [
@@ -74,6 +73,6 @@ config.universal = {
   secret: 'eUWEUVYKRvfxMaZNgY4Q7eWV',
   sessionTimeout: 4,
   bcryptRounds: 10
-}
+};
 
 module.exports = config;

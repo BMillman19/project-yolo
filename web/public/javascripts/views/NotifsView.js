@@ -1,42 +1,35 @@
 (function (window, $, _, Backbone, PUApp) {
-  var NotifView = PUApp.views.NotifView;
   var NotifsView = Backbone.View.extend({
-    tagName: 'div',
-    className: 'notifs',
+    el: '#notifs',
+    template: _.template($('#notif-template').html() || ''),
     initialize: function () {
       this.model = this.options.model;
-      this.model
-        .on('add', _.bind(this.addNotif, this));
-      this.subviews = {};
-      this.resetSelection();
     },
     events: {
-      'click .notif-tag': 'clickHandler'
+      'click .notif-tag': 'filterByTag',
+      'click .pushpin': 'togglePushpin'
     },
-    clickHandler: function (e) {
+    togglePushpin: function (e) {
+      var pin = $(e.currentTarget).find('.pushpin-img');
+      if (pin.toggleClass('pushpin-active').hasClass('pushpin-active')) {
+        pin.attr('src', 'images/pushpin-active.png');
+      } else {
+        pin.attr('src', 'images/pushpin.png');
+      }
+    },
+    filterByTag: function (e) {
       var tagName = $(e.target).html();
-      this.model.each(_.bind(function (model) {
-        if (!_.include(model.get('tags'), tagName)) {
-          this.subviews[model.cid].$el.fadeOut(400);
-        }
-      }, this));
+      this.render(this.model.filterByTag(tagName));
     },
     resetSelection: function () {
-      this.model.each(_.bind(function (model) {
-        this.subviews[model.cid].$el.fadeIn(400);
-      }, this));
+      this.render();
     },
-    addNotif: function (notifModel) {
-      var view = new NotifView({
-          model: notifModel
-      });
-      this.$el.append(view.render().$el);
-      this.subviews[notifModel.cid] = view;
+    search: function (query) {
+      this.render(this.model.search(query));
     },
-    render: function () {
-      _.each(this.model.models, _.bind(function (userModel) {
-        this.subviews[userModel.cid].render();
-      }, this));
+    render: function (models) {
+      var templateCtx = (models && _.invoke(models, 'toJSON')) || this.model.toJSON();
+      this.$el.html(this.template(templateCtx));
       return this;
     }
   });
