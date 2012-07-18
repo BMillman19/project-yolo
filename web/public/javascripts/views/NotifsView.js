@@ -24,6 +24,9 @@
     resetSelection: function () {
       this.render();
     },
+    search: function (query) {
+      this.render(this.model.search(query));
+    },
     render: function (models) {
       var templateCtx = (models && _.invoke(models, 'toJSON')) || this.model.toJSON();
       this.$el.html(this.template(templateCtx));

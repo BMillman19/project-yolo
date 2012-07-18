@@ -43,9 +43,6 @@
     },
     redirect: function () {
 
-    },
-    resetSelection: function () {
-      this.notifsview.render();
     }
   });
 
@@ -60,8 +57,9 @@
     if (e.keyCode === 27 && router.notifsview) {
       router.notifsview.resetSelection();
     }
-  }).on('change', '.search-box', function (e) {
-
-  });
+  }).on('keyup', 'input[type=text].search-box', _.throttle(function (e) {
+    var input = $(e.currentTarget).attr('value');
+    router.notifsview.search(input);
+  }, 10));
 
 }(window, $, _, Backbone, PUApp));
