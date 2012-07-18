@@ -13,7 +13,6 @@
       this.notifsview = new NotifsView({
         model: this.notifs
       });
-      $('#notifs').append(this.notifsview.$el);
 
       this.notifs.add([
         { priority: 0, header: 'test', body: 'yolo', tags: ['aaa'] },
@@ -46,23 +45,23 @@
 
     },
     resetSelection: function () {
-      this.notifsview.resetSelection();
+      this.notifsview.render();
     }
   });
 
   PUApp.controllers.Router = Router;
 
 
+  var router = new PUApp.controllers.Router();
   $(document).ready(function () {
-    var router = new PUApp.controllers.Router();
     Backbone.history.start();
     router.navigate();
+  }).keyup(function (e) {
+    if (e.keyCode === 27 && router.notifsview) {
+      router.notifsview.resetSelection();
+    }
+  }).on('change', '.search-box', function (e) {
 
-    $(document).keyup(function (e) {
-      if (e.keyCode === 27) {
-        router.resetSelection();
-      }
-    });
   });
 
 }(window, $, _, Backbone, PUApp));

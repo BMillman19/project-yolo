@@ -3,6 +3,11 @@
   var Notifs = Backbone.Collection.extend({
     model: Notif,
     initialize: function () {
+    },
+    filterByTag: function (tag) {
+      return this.filter(function (notif) {
+        return _.include(notif.get('tags'), tag);
+      });
     }
   });
 
