@@ -15,7 +15,7 @@ module.exports = (function () {
 
     send: function (options, callback) {
       // If no transport is defined, call initialize
-      if (typeof transport === 'undefined') this.init();
+      if (exists(transport)) this.init();
       var combinedOpts = _.defaults(options, email.defaults);
       combinedOpts.html = template(options.data);
       transport.sendMail(combinedOpts, callback);

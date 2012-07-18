@@ -1,12 +1,13 @@
+var crypto = require('../lib/crypto')
+  , exception = require('../lib/exception');
+
 /**
  * GET /auth
- * @param req req.params should equal {username: ..., password:
- * ...}
+ * @param req req.params should equal {email: ..., password: ...}
  * @param res the response that will be returned
  */
 exports.auth = function (req, res) {
-  var params = req.query
-    , crypto = require('../lib/crypto');
+  var params = req.query;
 
   // Updates a user's session in the database
   var updateDbSessionToken = function (userid, clientToken) {
@@ -14,66 +15,79 @@ exports.auth = function (req, res) {
       , change = {session: crypto.genSessionToken(clientToken)};
     Models.User.update(query, {$set: change}, {}, function (err) {
       if (err) {
-        console.log(err);
-        res.send(500);
+        exception.sendUnkE(res, err);
       }
     });
   };
 
-  // Look for username and password combo
+  // Look for email and password combo
   Models.User.find({
-    username: params.username,
+    email: params.email.toLowerCase(),
   }, function (err, data) {
     var user = data[0];
     if (!err) {
+      // If user exists and password matches, send client session token
       if (data.length > 0 &&
           crypto.checkPassword(params.password, user.password)) {
-        var token = crypto.genClientToken(params.username);
+        var token = crypto.genClientToken(params.email);
         updateDbSessionToken(user._id, token);
         res.send(token);
       } else {
-        res.send(403, 'Authentication credentials were invalid.');
+        exception.sendE(res, 'INVALID_CREDENTIALS');
       }
     } else {
-      console.log(err);
-      res.send(500);
+      exception.sendUnkE(res, err);
     }
   });
 }
 
+/**
+ * POST /signup
+ * @param req req.body should contain at minimum email and password
+ * @param res the response that will be returned
+ */
 exports.signup = function (req, res) {
-  var params = req.body
-    , crypto = require('../lib/crypto')
-    , _ = require('underscore');
+  var params = req.body;
 
   // Filter query relevant keys
-  // TODO: validation on these params
   params = _.pick(params,
-    'username',
-    'password',
     'email',
+    'password',
     'phone',
     'preferences',
     'associations'
   );
+
+  if (!exists(params.email) || !exists(params.password)){
+    exception.sendE(res, 'VALIDATION_EXCEPTION', 'Missing either email or password');
+    return false;
+  }
+  // Validate password
+  if (!/^[\w\W]{7,32}$/.test(params.password)) {
+    exception.sendE(res, 'VALIDATION_EXCEPTION', 'Invalid password');
+    return false;
+  }
+
+  // Encrypt password using bcrypt
   params.password = crypto.bcrypt(params.password);
 
+  // Look for existing user with same username (email)
   Models.User.find({
-    username: params.username
+    email: params.email.toLowerCase()
   }, function (err, data) {
     if (!err) {
       if (data.length === 0) {
         var user = new Models.User(params);
+        // TODO: do validation here
         user.save(function (err) {
           if (err) {
-            console.log(err);
-            res.send(500);
+            exception.sendE(res, 'VALIDATION_EXCEPTION', err.errors);
           } else {
             res.send(201);
           }
         });
       } else {
-        res.send(409, 'Username already taken.')
+        exception.sendE(res, 'SIGNUP_EXCEPTION');
       }
     }
   });

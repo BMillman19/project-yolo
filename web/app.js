@@ -3,9 +3,14 @@ var express = require('express')
   , http = require('http')
   , sys = require('sys')
   , exec = require('child_process').exec
-  , _ = require('underscore')
   , config = require('./config');
 
+// Globals
+_ = require('underscore')
+  , exists = function (any) { return (typeof any !== 'undefined'); }
+  , existsOrElse = function (any, alt) { return exists(any) ? any : alt; };
+
+// Set up mongoose with MongoDB
 mongoose = require('mongoose');
 mongoose.connect(process.env.PROMPTU_MONGO_URI || 'mongodb://localhost/promptu');
 Models = require('./models/models');
