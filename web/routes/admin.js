@@ -1,21 +1,7 @@
-
-/*
- * GET home page.
- */
-
-exports.index = function (req, res) {
-  res.render('index', {
-    title: 'Express',
-    stylesheets: app.settings.stylesheets,
-    scripts: app.settings.scripts,
-    templates: app.settings.templates
-  });
-};
-
 exports.notif = function (req, res) {
   var mail = require('../lib/mail');
   mail.send({
-    to: req.body.to,
+    to: req.body['to'],
     data: {
       subject: 'test',
       header_image: 'blah',
@@ -27,8 +13,12 @@ exports.notif = function (req, res) {
       update_profile_link: 'blah'
     }
   }, function (err, resStatus) {
-    if (!err) {
+    if (!err)
       res.send(resStatus);
-    }
   });
-};
+}
+
+exports.announcement = function (req, res) {
+
+}
+
