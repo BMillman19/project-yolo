@@ -8,20 +8,52 @@
 
 #import "MenuViewController.h"
 
-@interface MenuViewController ()
+#import "PromptViewController.h"
+#import "PromptCenter.h"
+#import "Underscore.h"
 
-@end
 
 @implementation MenuViewController
+
+@synthesize promptViewController;
+
+- (void)dealloc {
+    [promptViewController release];
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
+
+- (IBAction)shuffle:(id)sender {
+    [(PromptCenter *)[PromptCenter sharedInstance] fetchPrompts:234234 withCallback: ^(long userId, id result, NSError* error) {
+            if(!error) {
+                self.promptViewController.prompts = _array(result).shuffle.unwrap;
+                self.promptViewController.title = @"Shuffle";
+                [self.promptViewController refreshView];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MENU_ITEM_SELECTED object:nil];
+         }
+     }];
+}
+
+//- (IBAction)shuffle:(id)sender {
+//    [(PromptCenter *)[PromptCenter sharedInstance] fetchPrompts:234234 withCallback: ^(long userId, id result, NSError* error) {
+//        if(!error) {
+//            self.promptViewController.prompts = _array(result).filter(^BOOL (id obj) {
+//                return [obj isKindOfClass:[NSDictionary class]];
+//            }).unwrap;
+//            [self.promptViewController refreshView];
+//        }
+//    }];
+//}
+
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -32,8 +64,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.promptViewController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

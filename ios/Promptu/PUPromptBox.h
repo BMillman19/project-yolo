@@ -14,13 +14,14 @@
 
 @interface PUPromptBox : MGStyledBox
 
-@property(nonatomic, assign) int position;
-@property(nonatomic, assign) CGFloat alphaValue;
-@property(nonatomic, assign) id<PUPromptBoxDelegate> delegate;
-@property(nonatomic, assign) id<PUPromptBoxDataSource> dataSource;
-@property(nonatomic, assign) bool isExpanded;
+@property (nonatomic, assign) NSInteger promptId;
+@property (nonatomic, assign) CGFloat alphaValue;
+@property (nonatomic, assign) id<PUPromptBoxDelegate> delegate;
+@property (nonatomic, assign) id<PUPromptBoxDataSource> dataSource;
+@property (nonatomic, assign) bool isExpanded;
+@property (nonatomic, retain) UIView *mask;
 
-+ (id)promptBoxWithPosition:(int)aPosition;
++ (id)promptBoxWithPromptId:(NSInteger)aPromptId;
 
 @end
 
@@ -38,6 +39,6 @@
 @protocol PUPromptBoxDataSource <NSObject>
 
 @required
-- (PUPrompt *)promptAtPosition:(int)position;
+- (PUPrompt *)promptWithId:(NSInteger)promptId;
 
 @end

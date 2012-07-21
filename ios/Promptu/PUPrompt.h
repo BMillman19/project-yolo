@@ -10,9 +10,9 @@
 
 @interface PUPrompt : NSObject
 
-@property (nonatomic, assign) long uId;
-@property (nonatomic, assign) long authorId;
-@property (nonatomic, assign) long groupId;
+@property (nonatomic, assign) NSInteger uId;
+@property (nonatomic, assign) NSInteger authorId;
+@property (nonatomic, assign) NSInteger groupId;
 @property (nonatomic, retain) NSString* header;
 @property (nonatomic, retain) NSString* body;
 @property (nonatomic, assign) int priority;

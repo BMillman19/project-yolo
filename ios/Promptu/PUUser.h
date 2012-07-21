@@ -10,7 +10,7 @@
 
 @interface PUUser : NSObject
 
-@property (nonatomic, assign) long userId;
+@property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, retain) NSString* firstName;
 @property (nonatomic, retain) NSString* lastName;
 @property (nonatomic, retain) NSString* email;

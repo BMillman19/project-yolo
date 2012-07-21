@@ -12,11 +12,9 @@
 
 @implementation RefreshViewController
 
-@synthesize refreshHeaderView, reloading, scroller, header, footer;
+@synthesize refreshHeaderView, reloading, scroller;
 
 - (void)dealloc {
-    self.refreshHeaderView.delegate = nil;
-	self.refreshHeaderView = nil;
     [refreshHeaderView release];
     [scroller release];
     [super dealloc];
@@ -92,7 +90,7 @@
     temp.showsCancelButton=NO;
     temp.autocorrectionType=UITextAutocorrectionTypeNo;
     temp.autocapitalizationType=UITextAutocapitalizationTypeNone;
-    temp.placeholder = @"Yolo bitch";
+    temp.placeholder = @"Search";
     temp.delegate=self;
     self.scroller.tableHeaderView=temp;
     [temp release];
@@ -102,9 +100,12 @@
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
     self.refreshHeaderView.delegate = nil;
 	self.refreshHeaderView = nil;
+    self.scroller.delegate = nil;
+    self.scroller.dataSource = nil;
+    self.scroller = nil;
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,35 +114,6 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)addBox:(id<MGBoxProtocol>)aBox atIndex:(int)index
-{
-    
-    if(self.header)
-        index += 1;
-    if(self.footer)
-        [self.scroller.boxes removeObject:self.footer];
-    [self.scroller.boxes insertObject:aBox atIndex:index];
-    if(self.footer)
-        [self.scroller.boxes addObject:self.footer];
-}
-
-- (void)addBox:(id<MGBoxProtocol>)aBox;
-{
-    [self addBox:aBox atIndex:0];
-}
-
-- (void)setFooter:(id<MGBoxProtocol>)aFooter
-{
-    footer = aFooter;
-    [self.scroller.boxes addObject:aFooter];
-}
-
-- (void)setHeader:(id<MGBoxProtocol>)aHeader
-{
-    header = aHeader;
-    [self.scroller.boxes insertObject:aHeader atIndex:0];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

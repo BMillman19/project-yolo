@@ -19,22 +19,26 @@
 #define DEFAULT_LEFT_MARGIN      8.0
 #define CORNER_RADIUS            4.0
 
+#define PRIORITY_ZERO 0
+#define PRIORITY_ONE  1
+#define PRIORITY_TWO  2
+
 @implementation PUPromptBox
 
-@synthesize position, alphaValue, delegate, dataSource, isExpanded;
+@synthesize promptId, alphaValue, delegate, dataSource, isExpanded, mask;
 
-+ (id)promptBoxWithPosition:(int)aPosition
++ (id)promptBoxWithPromptId:(NSInteger)aPromptId
 {
     CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, DEFAULT_WIDTH, 0);
-    PUPromptBox *box = [[[self class] alloc] initWithFrame:frame withPosition:aPosition];
+    PUPromptBox *box = [[[self class] alloc] initWithFrame:frame];
+    box.promptId = aPromptId;
     return box;
 }
 
-- (id)initWithFrame:(CGRect)frame withPosition:(int)aPosition
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        position = aPosition;
         alphaValue = 1.0;
         isExpanded = NO;
         
@@ -45,18 +49,20 @@
         [self addGestureRecognizer:singleFingerTap];
         
         // Hook up a swipe gesture recognizer
-        UISwipeGestureRecognizer *swipeRight = 
-        [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(handleSwipe)];
-        [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-        [self addGestureRecognizer:swipeRight];
+        UILongPressGestureRecognizer *longPress = 
+        [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(handleLongPress)];
+        [self addGestureRecognizer:longPress];
+        
+        mask = [[UIView alloc] initWithFrame:self.frame];
+        [mask setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.78]];
     }
     return self;
 }
 
 - (void)handleTap
 {
-    PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
+    PUPrompt *prompt = [self.dataSource promptWithId:self.promptId];
 
     if (!isExpanded) {
         MGBoxLine *body = [MGBoxLine multilineWithText:prompt.body font:nil padding:12];
@@ -77,7 +83,23 @@
         [self.delegate promptBoxDidExpand:self];
     } else {
         [self.topLines removeAllObjects];
-        NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:@"p0"], prompt.header, nil];
+        
+        NSString *blockImage = nil;
+        switch (prompt.priority) {
+            case PRIORITY_ZERO:
+                blockImage = @"red";
+                break;
+            case PRIORITY_ONE:
+                blockImage = @"orange";
+                break;
+            case PRIORITY_TWO:
+                blockImage = @"green";
+                break;
+                
+            default:
+                break;
+        }
+        NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:blockImage], prompt.header, nil];
         MGBoxLine *header = [MGBoxLine lineWithLeft:left right:@"24m"];
         header.rightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
         header.font = TITLE_FONT;
@@ -87,15 +109,17 @@
     self.isExpanded = !self.isExpanded;
 }
 
-- (void)handleSwipe
+- (void)handleLongPress
 {
-    PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
+    PUPrompt *prompt = [self.dataSource promptWithId:self.promptId];
 
     if (!prompt.dissmissed) {
-        //[self setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.5]];        
+        //[self addSubview:mask];  
+        self.newAlpha = 0.5;
         [self.delegate promptBoxDidDissmiss:self];
     } else {
-        //[self setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:1.0]];        
+        //[mask removeFromSuperview];
+        self.newAlpha = 1.0;
         [self.delegate promptBoxDidUndissmiss:self];
     }
 
@@ -103,23 +127,29 @@
 
 - (void)setDataSource:(id<PUPromptBoxDataSource>)aDataSource {
     dataSource = aDataSource;
-    PUPrompt *prompt = [self.dataSource promptAtPosition:self.position];
-    NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:@"p0"], prompt.header, nil];
+    PUPrompt *prompt = [self.dataSource promptWithId:self.promptId];
+    NSString *blockImage = nil;
+    switch (prompt.priority) {
+        case PRIORITY_ZERO:
+            blockImage = @"red";
+            break;
+        case PRIORITY_ONE:
+            blockImage = @"orange";
+            break;
+        case PRIORITY_TWO:
+            blockImage = @"green";
+            break;
+            
+        default:
+            break;
+    }
+
+    NSArray *left = [NSArray arrayWithObjects:[UIImage imageNamed:blockImage], prompt.header, nil];
     MGBoxLine *header = [MGBoxLine lineWithLeft:left right:@"24m"];
     header.rightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
     header.font = TITLE_FONT;
     [self.topLines addObject:header];
     
 }
-
-
-
-
-//- (void)drawRect:(CGRect)rect
-//{
-//    self.layer.
-//}
-
-
 
 @end

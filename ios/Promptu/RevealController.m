@@ -32,9 +32,6 @@
 
 #import "RevealController.h"
 
-#import "PromptViewController.h"
-#import "MenuViewController.h"
-
 @implementation RevealController
 
 #pragma mark - Initialization
@@ -46,6 +43,10 @@
 	if (nil != self)
 	{
 		self.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(revealToggle:)
+                                                     name:MENU_ITEM_SELECTED
+                                                   object:nil];
 	}
 	
 	return self;

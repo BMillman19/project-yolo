@@ -17,7 +17,7 @@
 @implementation MGBox
 
 @synthesize topLines, middleLines, bottomLines, content, isReplacement;
-@synthesize topMargin, bottomMargin, width, misc;
+@synthesize topMargin, bottomMargin, width, misc, newAlpha;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -26,6 +26,7 @@
         self.middleLines = [NSMutableArray array];
         self.bottomLines = [NSMutableArray array];
         self.width = frame.size.width;
+        self.newAlpha = 1.0;
     }
     return self;
 }

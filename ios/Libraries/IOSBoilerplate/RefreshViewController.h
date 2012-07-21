@@ -18,8 +18,6 @@
 @property (nonatomic, retain) EGORefreshTableHeaderView *refreshHeaderView;
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, retain) IBOutlet MGScrollView *scroller;
-@property (nonatomic, retain) id<MGBoxProtocol> header;
-@property (nonatomic, retain) id<MGBoxProtocol> footer;
 
 - (void)reloadDataSource;
 - (void)addBox:(id<MGBoxProtocol>)aBox atIndex:(int)index;

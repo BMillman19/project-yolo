@@ -104,7 +104,7 @@
             CGSize size = box.frame.size;
             finalY += box.topMargin;
             box.frame = CGRectMake(pos.x, finalY, size.width, size.height);
-            box.alpha = 1;
+            box.alpha = box.newAlpha;
             finalY += size.height + box.bottomMargin;
         }
 

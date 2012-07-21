@@ -33,8 +33,9 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     
     PromptViewController* frontViewController = [[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil];	
+    frontViewController.title = @"Promptu";
     MenuViewController *rearViewController = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
-	//rearViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rebel"]];
+    rearViewController.promptViewController = frontViewController;
     UINib *nib = [UINib nibWithNibName:@"NavBar" bundle:nil];
 	UINavigationController *navigationController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
     

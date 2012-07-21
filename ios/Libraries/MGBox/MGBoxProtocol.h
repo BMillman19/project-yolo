@@ -10,6 +10,8 @@
 @property (nonatomic, assign) CGFloat topMargin;
 @property (nonatomic, assign) CGFloat bottomMargin;
 @property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat newAlpha;
+
 
 - (void)draw;
 
