@@ -85,8 +85,12 @@ app.configure('production', function () {
 // ROUTES
 app.get('/', routes.index);
 
-app.get('/auth', routes.auth);
+app.post('/auth', routes.auth);
 app.post('/signup', routes.signup);
+
+app.get('/group/:id', routes.getGroup);
+app.post('/group/create', routes.createGroup);
+app.del('/group/delete', routes.deleteGroup);
 
 app.post('/notif', routes.notif);
 
