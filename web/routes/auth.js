@@ -77,7 +77,13 @@ exports.signup = function (req, res) {
   }, function (err, data) {
     if (!err) {
       if (data.length === 0) {
-        var user = new Models.User(params);
+        var now = Date.now()
+          , userParams = _.extend(
+            {},
+            params,
+            {created: now, updated: now}
+          )
+          , user = new Models.User(userParams);
         // TODO: do validation here
         user.save(function (err) {
           if (err) {
