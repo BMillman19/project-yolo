@@ -38,13 +38,13 @@ var UserSchema = new Schema(
 // TODO:     Validate that using embedded-docs would work for insertions, etc.
 var GroupSchema = new Schema(
   {
-      _id:       ObjectId
-    , parent:    {type:    ObjectId, index:       true, required:  true}
-    , children:  {type:    [GroupSchema], index:  true}
-    , owner:     {type:    ObjectId, index:       true, required:  true}
-    , members:   {type:    [{type:                ObjectId, ref:   'User'}], index:  true}
-    , created:   {type:    Date, index:           true}
-    , updated:   {type:    Date, index:           true}
+      _id:      ObjectId
+    , path:     {type:    String,   index:  true}
+    , name:     {type:    String,   index:  true, required:  true}
+    , owner:    {type:    ObjectId, ref:    'User', index:   true, required:   true}
+    , members:  {type:    [{type:           ObjectId, ref:   'User'}], index:  true}
+    , created:  {type:    Date, index:      true}
+    , updated:  {type:    Date, index:      true}
   }
   , {strict: true}
 );
@@ -54,7 +54,7 @@ var GroupSchema = new Schema(
  */
 var PromptSchema = new Schema(
   {
-    _id: ObjectId
+      _id: ObjectId
     // TODO: Fill out the rest of this
   }
   , {strict: true}

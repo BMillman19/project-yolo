@@ -27,8 +27,7 @@ exports.notif = function (req, res) {
       update_profile_link: 'blah'
     }
   }, function (err, resStatus) {
-    if (!err) {
-      res.send(resStatus);
-    }
+    if (err) { exception.sendE(res, 'MAIL_EXCEPTION', err); return; }
+    res.send(resStatus);
   });
 };

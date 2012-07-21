@@ -1,13 +1,12 @@
-var crypto = require('../lib/crypto')
-  , exception = require('../lib/exception');
+var crypto = require('../lib/crypto');
 
 /**
  * GET /auth
- * @param req req.params should equal {email: ..., password: ...}
+ * @param req req.body should equal {email: ..., password: ...}
  * @param res the response that will be returned
  */
 exports.auth = function (req, res) {
-  var params = req.query;
+  var params = req.body;
 
   // Updates a user's session in the database
   var updateDbSessionToken = function (userid, clientToken) {
@@ -21,16 +20,14 @@ exports.auth = function (req, res) {
   };
 
   // Look for email and password combo
-  Models.User.find({
+  Models.User.findOne({
     email: params.email.toLowerCase(),
   }, function (err, data) {
-    var user = data[0];
     if (!err) {
       // If user exists and password matches, send client session token
-      if (data.length > 0 &&
-          crypto.checkPassword(params.password, user.password)) {
+      if (data && crypto.checkPassword(params.password, data.password)) {
         var token = crypto.genClientToken(params.email);
-        updateDbSessionToken(user._id, token);
+        updateDbSessionToken(data._id, token);
         res.send(token);
       } else {
         exception.sendE(res, 'INVALID_CREDENTIALS');
@@ -50,7 +47,7 @@ exports.signup = function (req, res) {
   var params = req.body;
 
   // Filter query relevant keys
-  params = _.pick(params,
+  params = _(params).pick(
     'email',
     'password',
     'phone',
@@ -72,30 +69,26 @@ exports.signup = function (req, res) {
   params.password = crypto.bcrypt(params.password);
 
   // Look for existing user with same username (email)
-  Models.User.find({
+  Models.User.findOne({
     email: params.email.toLowerCase()
   }, function (err, data) {
-    if (!err) {
-      if (data.length === 0) {
-        var now = Date.now()
-          , userParams = _.extend(
-            {},
-            params,
-            {created: now, updated: now}
-          )
-          , user = new Models.User(userParams);
-        // TODO: do validation here
-        user.save(function (err) {
-          if (err) {
-            exception.sendE(res, 'VALIDATION_EXCEPTION', err.errors);
-          } else {
-            res.send(201);
-          }
-        });
+    if (err) { exception.sendUnkE(res, err); return; }
+    if (data) { exception.sendE(res, 'SIGNUP_EXCEPTION'); return; }
+    // Create new user
+    var now = Date.now()
+      , userParams = _.extend(
+        {},
+        params,
+        {created: now, updated: now}
+      )
+      , user = new Models.User(userParams);
+    user.save(function (err) {
+      if (err) {
+        exception.sendE(res, 'VALIDATION_EXCEPTION', err.errors);
       } else {
-        exception.sendE(res, 'SIGNUP_EXCEPTION');
+        res.send(201);
       }
-    }
+    });
   });
 }
 

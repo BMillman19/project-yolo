@@ -7,6 +7,7 @@ var express = require('express')
 
 // Globals
 _ = require('underscore')
+  , exception = require('./lib/exception')
   , exists = function (any) { return (typeof any !== 'undefined'); }
   , existsOrElse = function (any, alt) { return exists(any) ? any : alt; };
 
@@ -84,13 +85,13 @@ app.configure('production', function () {
 
 // ROUTES
 app.get('/', routes.index);
-
 app.post('/auth', routes.auth);
 app.post('/signup', routes.signup);
 
 app.get('/group/:id', routes.getGroup);
+app.get('/group/tree/:id', routes.getGroupTree);
 app.post('/group/create', routes.createGroup);
-app.del('/group/delete', routes.deleteGroup);
+app.del('/group/delete/:id', routes.deleteGroup);
 
 app.post('/notif', routes.notif);
 
