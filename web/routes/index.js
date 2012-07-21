@@ -13,7 +13,19 @@ exports.index = function (req, res) {
 };
 
 exports.notif = function (req, res) {
-  var mail = require('../lib/mail');
+  var params = req.body
+    , apnConn = new apn.Connection(app.settings.apn)
+    , device = new apn.Device(params.to)
+    , notif = new apn.Notification();
+
+  notif.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+  notif.alert = params.message;
+  notif.payload = {'messageFrom': 'PromptU'};
+  notif.device = device;
+
+  apnConn.sendNotification(notif);
+  res.send(202);
+  /*var mail = require('../lib/mail');
   mail.send({
     to: req.body.to,
     data: {
@@ -29,5 +41,5 @@ exports.notif = function (req, res) {
   }, function (err, resStatus) {
     if (err) { exception.sendE(res, 'MAIL_EXCEPTION', err); return; }
     res.send(resStatus);
-  });
+  });*/
 };
