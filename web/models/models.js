@@ -10,6 +10,19 @@ function toLower (v) {
 }
 
 /**
+ * Device
+ *  to be used as an embedded doc in User
+ */
+var DeviceSchema = new Schema(
+  {
+      _id: ObjectId
+    , uuid: {type: String, required: true}
+    , token: {type: String, required: true}
+  }
+  , {strict: true}
+);
+
+/**
  * User
  */
 var UserSchema = new Schema(
@@ -20,6 +33,7 @@ var UserSchema = new Schema(
     , password:      {type:    String, index:  true, required: true}
     , name:          {type:    String, index:  true}
     , phone:         {type:    String, index:  true}
+    , devices:       [DeviceSchema]
     , preferences:   Mixed
     , associations:  Mixed
     , confirmed:     Boolean
@@ -60,9 +74,9 @@ var PromptSchema = new Schema(
   , {strict: true}
 );
 
-
 module.exports = {
   User: mongoose.model('User', UserSchema),
   Group: mongoose.model('Group', GroupSchema),
-  Prompt: mongoose.model('Prompt', PromptSchema)
+  Prompt: mongoose.model('Prompt', PromptSchema),
+  Device: mongoose.model('Device', DeviceSchema)
 }

@@ -16,6 +16,18 @@ mongoose = require('mongoose');
 mongoose.connect(process.env.PROMPTU_MONGO_URI || 'mongodb://localhost/promptu');
 Models = require('./models/models');
 
+// Options for Apple Push Notifications
+apn = require('apn');
+var certConf = config.universal.apn.cert
+  , apnOpts = _.chain(certConf)
+    .pick('passphrase')
+    .extend(config.universal.apn.options, {
+      certData: fs.readFileSync(certConf.path + certConf.cert),
+      keyData: fs.readFileSync(certConf.path + certConf.key),
+      //ca: fs.readFileSync(certConf.path + certConf.ca),
+    })
+    .value();
+
 var puts = function (error, stdout, stderr) {
   sys.puts(stdout);
   sys.puts(stderr);
@@ -75,13 +87,19 @@ app.configure('development', function () {
   app.set('stylesheets', config.development.stylesheets);
   app.set('scripts', config.development.scripts);
   app.set('email', config.development.email);
+  app.set('apn', _(apnOpts).extend({
+    gateway: config.development.apnGateway
+  }));
   app.use(express.errorHandler());
 });
 
 app.configure('production', function () {
   app.set('scripts', config.production.scripts);
+  app.set('email', config.development.email);
+  app.set('apn', _(apnOpts).extend({
+    gateway: config.production.apnGateway
+  }));
 });
-
 
 // ROUTES
 app.get('/', routes.index);

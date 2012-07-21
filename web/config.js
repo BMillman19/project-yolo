@@ -52,7 +52,8 @@ config.development = {
       subject: 'New Notification from promptU',
       template: 'templates/email.html'
     }
-  }
+  },
+  apnGateway: 'gateway.sandbox.push.apple.com'
 };
 
 config.production = {
@@ -66,13 +67,31 @@ config.production = {
       'javascripts/vendor/underscore.min.js',
       'javascripts/vendor/backbone.min.js'
     ]
-  }
+  },
+  apnGateway: 'gateway.push.apple.com'
 };
 
 config.universal = {
   secret: 'eUWEUVYKRvfxMaZNgY4Q7eWV',
   sessionTimeout: 4,
-  bcryptRounds: 10
+  bcryptRounds: 10,
+  apn: {
+    cert: {
+      path: '../res/push/',
+      cert: 'PromptuPushCert.pem',
+      key: 'PromptuPushKey.pem',
+      ca: 'aps_development.cer',
+      passphrase: 'BrandonKevinYang'
+    },
+    options: {
+      port: 2195,
+      enhanced: true,
+      errorCallback: function (err, notification) {
+        console.log(err, notification);
+      },
+      cacheLength: 100
+    }
+  }
 };
 
 module.exports = config;
