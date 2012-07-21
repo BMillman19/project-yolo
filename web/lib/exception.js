@@ -11,9 +11,17 @@ var exceptions = {
     code: 400,
     msg: 'Malformed inputs'
   },
+  NOT_FOUND_EXCEPTION: {
+    code: 404,
+    msg: 'Requested object could not be found'
+  },
   SIGNUP_EXCEPTION: {
     code: 409,
     msg: 'Could not create user because user already exists'
+  },
+  MAIL_EXCEPTION: {
+    code: 500,
+    msg: 'Could not send email'
   }
 }
 
@@ -22,10 +30,10 @@ module.exports = _.extend({}, exceptions, {
   sendE: function (res, e, info) {
     var exception = this[e] || this.API_EXCEPTION;
 
-    console.log("Exception in API", exception, {info: info});
 
     if (exists(exception)) {
       if (exists(info)) exception.info = info;
+      console.log("Exception in API", exception);
       res.json(exception, exception.code);
     }
   },
