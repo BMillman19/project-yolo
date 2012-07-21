@@ -849,11 +849,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33ED468521CB4778A782B352 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brandon Millman (U4NQP58Q7Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brandon Millman (U4NQP58Q7Z)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Promptu/Promptu-Prefix.pch";
 				INFOPLIST_FILE = "Promptu/Promptu-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "CB84780E-EEBB-45A5-8E51-98C4C5144C09";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CB84780E-EEBB-45A5-8E51-98C4C5144C09";
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -862,11 +867,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33ED468521CB4778A782B352 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brandon Millman (U4NQP58Q7Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brandon Millman (U4NQP58Q7Z)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Promptu/Promptu-Prefix.pch";
 				INFOPLIST_FILE = "Promptu/Promptu-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "CB84780E-EEBB-45A5-8E51-98C4C5144C09";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CB84780E-EEBB-45A5-8E51-98C4C5144C09";
+				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

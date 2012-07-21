@@ -30,6 +30,8 @@
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window = window;
 	
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     
     PromptViewController* frontViewController = [[PromptViewController alloc] initWithNibName:@"PromptViewController" bundle:nil];	
@@ -55,6 +57,25 @@
 	self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];
 	return YES;
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken { 
+    
+    NSString *str = [NSString 
+                     stringWithFormat:@"%@",deviceToken];
+    NSString *newString = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    
+    
+    NSLog(@"Your deviceToken ---> %@",newString);
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"Fuck Me");
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
