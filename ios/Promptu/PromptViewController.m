@@ -146,6 +146,10 @@
     [self.scroller drawBoxesWithSpeed:ANIM_SPEED];
 }
 
+- (void)promptBoxShowDetailed:(PUPromptBox *)promptBox {
+    
+}
+
 #pragma mark - PUPromptBoxDataSource
 
 - (PUPrompt *)promptWithId:(NSInteger)promptId {

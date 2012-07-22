@@ -99,6 +99,7 @@
 		E5B1EE2B15B7BB6C0089CC77 /* icons-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B1EDFB15B7BB6C0089CC77 /* icons-grey.png */; };
 		E5B1EE2C15B7BB6C0089CC77 /* icons-white.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B1EDFC15B7BB6C0089CC77 /* icons-white.png */; };
 		E5B1EE3015B864620089CC77 /* PrettyToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B1EE2F15B864620089CC77 /* PrettyToolbar.m */; };
+		E5B1EF2915BB77330089CC77 /* UILabelStrikethrough.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B1EF2815BB77320089CC77 /* UILabelStrikethrough.m */; };
 		E5D88EA015B3E3470040F94B /* MGBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D88E9615B3E3470040F94B /* MGBox.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E5D88EA115B3E3470040F94B /* MGBoxLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D88E9815B3E3470040F94B /* MGBoxLine.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E5D88EA215B3E3470040F94B /* MGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D88E9B15B3E3470040F94B /* MGButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -238,6 +239,8 @@
 		E5B1EDFC15B7BB6C0089CC77 /* icons-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-white.png"; sourceTree = "<group>"; };
 		E5B1EE2E15B864620089CC77 /* PrettyToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyToolbar.h; sourceTree = "<group>"; };
 		E5B1EE2F15B864620089CC77 /* PrettyToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyToolbar.m; sourceTree = "<group>"; };
+		E5B1EF2715BB77320089CC77 /* UILabelStrikethrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabelStrikethrough.h; sourceTree = "<group>"; };
+		E5B1EF2815BB77320089CC77 /* UILabelStrikethrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelStrikethrough.m; sourceTree = "<group>"; };
 		E5D88E9515B3E3470040F94B /* MGBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBox.h; sourceTree = "<group>"; };
 		E5D88E9615B3E3470040F94B /* MGBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBox.m; sourceTree = "<group>"; };
 		E5D88E9715B3E3470040F94B /* MGBoxLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBoxLine.h; sourceTree = "<group>"; };
@@ -419,10 +422,12 @@
 				E598126515B28F3500D2EC95 /* NSString+Helper.h */,
 				E598126815B28F9800D2EC95 /* NSData+Helper.h */,
 				E5D88EAF15B520DF0040F94B /* UIColor+CreateMethods.h */,
+				E5B1EF2715BB77320089CC77 /* UILabelStrikethrough.h */,
 				E5898BF015B1F9DD005EBEE0 /* Singleton.m */,
 				E598126615B28F3500D2EC95 /* NSString+Helper.m */,
 				E598126915B28F9800D2EC95 /* NSData+Helper.m */,
 				E5D88EB015B520DF0040F94B /* UIColor+CreateMethods.m */,
+				E5B1EF2815BB77320089CC77 /* UILabelStrikethrough.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -777,6 +782,7 @@
 				E5B1EDC015B6BA4C0089CC77 /* SEFilterKnob.m in Sources */,
 				E5B1EDC315B6BAAB0089CC77 /* FilterBox.m in Sources */,
 				E5B1EE3015B864620089CC77 /* PrettyToolbar.m in Sources */,
+				E5B1EF2915BB77330089CC77 /* UILabelStrikethrough.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

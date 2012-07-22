@@ -15,11 +15,9 @@
 @interface PUPromptBox : MGStyledBox
 
 @property (nonatomic, assign) NSInteger promptId;
-@property (nonatomic, assign) CGFloat alphaValue;
 @property (nonatomic, assign) id<PUPromptBoxDelegate> delegate;
 @property (nonatomic, assign) id<PUPromptBoxDataSource> dataSource;
-@property (nonatomic, assign) bool isExpanded;
-@property (nonatomic, retain) UIView *mask;
+@property (nonatomic, assign) int expandState;
 
 + (id)promptBoxWithPromptId:(NSInteger)aPromptId;
 
@@ -32,6 +30,7 @@
 - (void)promptBoxDidCompress:(PUPromptBox *)promptBox;
 - (void)promptBoxDidDissmiss:(PUPromptBox *)promptBox;
 - (void)promptBoxDidUndissmiss:(PUPromptBox *)promptBox;
+- (void)promptBoxShowDetailed:(PUPromptBox *)promptBox;
 
 
 @end
